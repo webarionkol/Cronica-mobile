@@ -9,7 +9,7 @@
 
 <ion-header padding color="mytheme" class="mybg head">
     <ion-row justify-content-center>
-      <ion-img src="assets/images/login.png" class="head-image"></ion-img>
+      <ion-img src="assets/images/logo.jpg" class="head-image"></ion-img>
     </ion-row>
   </ion-header>
   
@@ -28,6 +28,15 @@
         <ion-col>
           <ion-input clearInput type="email" placeholder="Email" [(ngModel)]="email" class="input" padding-horizontal></ion-input>
         </ion-col>
+        <ion-col>
+          <ion-input clearInput type="tel" placeholder="Phone No" [(ngModel)]="phone" class="input" padding-horizontal></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+   
+        <ion-col>
+          <ion-input clearInput type="text" placeholder="Address" [(ngModel)]="address" class="input" padding-horizontal></ion-input>
+        </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
@@ -40,14 +49,14 @@
         </ion-col>
       </ion-row>
       <div class="line"></div>
-      <ion-row>
+      <!-- <ion-row>
         <ion-col>
           <ion-button expand="block" fill="outline" color="fb"><ion-img src="assets/images/facebook_logo.png" slot="start" class="logo" margin-end></ion-img>Facebook</ion-button>
         </ion-col>
         <ion-col>
           <ion-button expand="block" color="light"><ion-img src="assets/images/google_logo.png" slot="start" class="logo" margin-end></ion-img>Google</ion-button>
         </ion-col>
-      </ion-row>
+      </ion-row> -->
       <ion-row>
         <ion-col>
           <ion-button expand="block" fill="outline" color="mytheme" (click)="fun.navigate('login')"><strong>Have an account? Sign in</strong></ion-button>
