@@ -8,11 +8,12 @@
  * 
  */
 import { Component } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { DataService } from './data.service';
 import { FunctionsService } from './functions.service';
+import { ApiService } from './api/api.service';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,7 @@ export class AppComponent {
 
   public appPages = [
     { title: 'Home', url: '/home', icon: 'home' },
-    { title: 'Search', url: '/search', modal: true, icon: 'search' },
+    // { title: 'Search', url: '/search', modal: true, icon: 'search' },
     // { title: 'Notifications', url: '/notification', icon: 'notifications' },
     { title: 'Shopping Cart', url: '/cart', icon: 'cart' },
     { title: 'Order History', url: '/orders', icon: 'list' },
@@ -34,9 +35,10 @@ export class AppComponent {
     // { title: 'Apply Promo', url: '/applypromo', icon: 'megaphone' }
   ];
   public appPages1 = [
-    { title: 'Customer Support', url: '/support', icon: 'people' },
-    { title: 'FAQs', url: '/faqs', icon: 'help-circle' },
-    { title: 'Settings', url: '/settings', icon: 'cog' }
+    // { title: 'Customer Support', url: '/support', icon: 'people' },
+   
+    { title: 'Settings', url: '/settings', icon: 'cog' },
+    // { title: 'Logout', url: '/faqs', icon: 'help-circle' },
   ];
 
   colors = [
@@ -79,7 +81,9 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public dataService: DataService,
-    public fun: FunctionsService
+    public fun: FunctionsService,
+    private api:ApiService,
+    public navCtrl:NavController,
   ) {
     this.initializeApp();
   }
@@ -87,6 +91,16 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
+      this.statusBar.backgroundColorByHexString('#ffffff');
+      if(!this.api.getToken())
+      {
+        this.api.presentToast("Please Login");
+        this.navCtrl.navigateRoot(['login']);
+      }
+      else
+      {
+        this.navCtrl.navigateRoot(['home']);
+      }
       // this.splashScreen.hide();
     });
   }

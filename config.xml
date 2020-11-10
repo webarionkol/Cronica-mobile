@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.enappd.shoppr" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Shoppr</name>
+<widget id="com.cronica.shoppr" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Cronica </name>
     <description>This E-commerce app starter is made by expert UI developers to provide a great app UI for your own e-commerce app. Now you can start your own e-commerce or shopping app with these functionalities. This is a great starting point for app development, as all pages and components are set. Hence, all you need here is to integrate your back-end and feed in the data. This app has many features common with popular apps like Amazon, Flipkart etc.</description>
     <author email="admin@enappd.com" href="https://enappd.com/">Enappd Team</author>
     <content src="index.html" />
@@ -13,6 +13,7 @@
     <allow-intent href="geo:*" />
     <preference name="ScrollEnabled" value="false" />
     <preference name="android-minSdkVersion" value="19" />
+    <preference name="android-targetSdkVersion" value="28" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="FadeSplashScreenDuration" value="300" />

@@ -12,6 +12,10 @@ import { FunctionsService } from '../functions.service';
 import { MenuController, ModalController } from '@ionic/angular';
 import { InfomodalPage } from '../infomodal/infomodal.page';
 import { DataService } from '../data.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from '../api/api.service';
+import { REGISTER } from '../config';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -19,13 +23,42 @@ import { DataService } from '../data.service';
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
-
-  first_name = '';
-  last_name = '';
-  email = '';
-  password = '';
-
-  constructor(private fun:FunctionsService, private menuCtrl: MenuController, private modalController: ModalController, private data: DataService) { 
+  
+  validations_form: FormGroup;
+  constructor(private fun:FunctionsService, private menuCtrl: MenuController, private modalController: ModalController, private data: DataService,
+    private formBuilder: FormBuilder,private api:ApiService,private router:Router) { 
+    this.validations_form = this.formBuilder.group({
+      first_name: new FormControl('', Validators.compose([
+        Validators.required,
+      ])),
+      last_name: new FormControl('', Validators.compose([
+      ])),
+      email: new FormControl('', Validators.compose([
+        Validators.required,  
+        Validators.email,
+      ])),
+      mobile_no: new FormControl('', Validators.compose([ 
+        Validators.required, 
+      ])),
+      password: new FormControl('', Validators.compose([  
+        Validators.required,
+      ])),
+      city: new FormControl('', Validators.compose([ 
+        Validators.required,
+      ])),
+      state: new FormControl('', Validators.compose([ 
+        Validators.required,
+      ])),
+      country: new FormControl('', Validators.compose([ 
+        Validators.required,
+      ])),
+      register_type: new FormControl('', Validators.compose([ 
+        Validators.required,
+      ])),
+      address: new FormControl('', Validators.compose([ 
+        Validators.required,
+      ]))
+     });
   }
 
   ngOnInit() {
@@ -36,12 +69,50 @@ export class SignupPage implements OnInit {
     this.menuCtrl.enable(false, 'end');
   }
 
-  signup(){
-    if(this.first_name != '' && this.last_name != '' && this.email != '' && this.password != '' && this.fun.validateEmail(this.email)){
-      this.fun.navigate('home',false);
+  signup(value){
+    this.api.presentLoading();
+    if(this.validations_form.invalid)
+    {
+      setTimeout(() => {
+        this.api.dismissLoading();
+      }, 2000);
+      console.log("invalid condition");
+      console.log(value);
+      this.api.presentToast("Please enter all details");
     }
-    else {
-      this.fun.presentToast('Wrong Input', true, 'bottom', 2100);
+    else{
+      console.log("else condition");
+      console.log(value);
+      var formdata = new FormData();
+      localStorage.setItem('email', value.email);
+      formdata.append("name", value.first_name+" "+value.last_name);
+      formdata.append("email", value.email);
+      formdata.append("mobile_no", value.mobile_no);
+      formdata.append("password", value.password);
+      formdata.append("city", value.city);
+      formdata.append("state", value.state);
+      formdata.append("country", value.country);
+      formdata.append("register_type", value.register_type);
+      formdata.append("address", value.address);
+      this.api.Post(REGISTER,formdata).then(data=>{
+        console.log(data);
+        setTimeout(() => {
+          this.api.dismissLoading();
+        }, 2000);
+        
+        if(data['status']==406)
+        {
+          this.api.presentToast(data['success'])
+        }
+        else{
+            this.router.navigate(['otp']);
+        }
+      }).catch(d=>{
+        console.log(d);
+        this.api.dismissLoading();
+        this.api.presentToast("Please try again");
+      })
+
     }
   }
 

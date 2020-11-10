@@ -32,15 +32,15 @@
     <ion-row lines="none" class="row">
       <ion-text class="name">{{product.name}}</ion-text>
     </ion-row>
-    <ion-row>
+    <!-- <ion-row>
       <ion-icon name="star" color="mytheme" *ngFor="let i of fun.array(product.rating)"></ion-icon>
       <ion-icon name="star-outline" color="mytheme" *ngFor="let i of fun.array(5-product.rating)"></ion-icon>
       <h6 no-margin padding-start class="rate" (click)="goToReviews()">({{product.store_rating}} store ratings)</h6>
-    </ion-row>
+    </ion-row> -->
     
    
     <div class="sep"></div>
-    <ion-row class="full info">
+    <!-- <ion-row class="full info">
       <ion-row>
         <ion-col><strong>Sizing</strong></ion-col>
       </ion-row>
@@ -75,24 +75,11 @@
         </ion-col>
       </ion-row>
     </ion-row>
-    <div class="sep"></div>
-    <div>
-      <ion-text><span float-left no-margin><strong>Sold By</strong></span></ion-text><br>
-      <ion-row>
-        <ion-col size="2">
-          <ion-avatar class="avatar"><img [src]="product.image[0]"></ion-avatar>
-        </ion-col>
-        <ion-col>
-          <ion-text><span float-left no-margin>{{product.sold_by}}</span></ion-text><br>
-          <ion-text>
-            <h6 float-left no-margin>{{product.store_rating}} ratings</h6>
-          </ion-text><br>
-        </ion-col>
-      </ion-row>
-    </div>
-    <div class="sep"></div>
+    <div class="sep"></div> -->
+  <!--  -->
+    <!-- <div class="sep"></div> -->
     <ion-list lines="none">
-      <ion-row class="full info" (click)="toogle(0)">
+      <!-- <ion-row class="full info" (click)="toogle(0)">
         <ion-col size="9">
           <strong float-left>Item Specification</strong>
         </ion-col>
@@ -100,13 +87,13 @@
           <ion-icon float-right name="arrow-dropdown" *ngIf="!open[0]"></ion-icon>
           <ion-icon float-right name="arrow-dropup" *ngIf="open[0]"></ion-icon>
         </ion-col>
-      </ion-row>
-      <ion-row class="full" margin-top *ngIf="open[0]">
+      </ion-row> -->
+      <!-- <ion-row class="full" margin-top *ngIf="open[0]">
         <ion-col>
           <span float-left>{{product.specs}}</span>
         </ion-col>
       </ion-row>
-      <div class="sep"></div>
+      <div class="sep"></div> -->
       <ion-row class="full info" (click)="toogle(1)">
         <ion-col size="9">
           <strong float-left>Description</strong>
@@ -122,7 +109,7 @@
         </ion-col>
       </ion-row>
       <div class="sep"></div>
-      <ion-row class="full info" (click)="toogle(2)">
+      <!-- <ion-row class="full info" (click)="toogle(2)">
         <ion-col size="9">
           <strong float-left>Buyer Guarantee</strong>
         </ion-col>
@@ -151,7 +138,7 @@
           <span float-left><strong>Standard Shipping</strong> {{product.currency}}{{product.shipping}}</span>
         </ion-col>
       </ion-row>
-      <!-- <div class="sep"></div> -->
+     
       <div (touchstart)="remove()" (touchend)="gainback()" *ngFor="let spon of product.sponsored">
         <ion-text>
           <h5 no-margin ><strong>Sponsored</strong></h5>
@@ -201,7 +188,7 @@
             </ion-col>
           </ion-row>
         </div>
-      </ion-row>
+      </ion-row> -->
 
     </ion-list>
   </div>

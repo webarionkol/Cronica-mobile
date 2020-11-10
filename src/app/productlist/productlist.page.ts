@@ -20,7 +20,7 @@ import { NavController } from '@ionic/angular';
 })
 export class ProductlistPage implements OnInit {
 
-  @Input() recieved_data: Array<Product>;
+
 
   constructor(private fun: FunctionsService, private nav: NavController) {
   }
@@ -28,9 +28,5 @@ export class ProductlistPage implements OnInit {
   ngOnInit() {
   }
 
-  open(data){
-    this.fun.update(data);
-    this.nav.navigateForward('/productdetail');
-  }
 
 }

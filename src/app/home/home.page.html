@@ -7,7 +7,7 @@
  * LICENSE.md file in the root directory of this source .
  */ -->
 
-<ion-header class="mybg">
+ <ion-header class="mybg">
   <ion-toolbar color="mytheme">
     <ion-buttons slot="start">
       <ion-menu-button color="light"></ion-menu-button>
@@ -33,79 +33,89 @@
 </ion-header>
 
 <ion-content color="light">
-  <ion-slides [options]="slideOptsOne">
-    <ion-slide >
-      <ion-card (click)=" this.newsService.onGoToTopStoryPage(item)">
-        <ion-card-content>
-          <ion-img src="https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs3/107296334/original/8565b4c6c7d291892d22a9a32c1287638376edec/lets-design-some-banner-for-a-online-jewelry-shop.png"></ion-img>
-          <h2> <b>TItt </b></h2>
-          <h4>sdfsajdl</h4>
-        </ion-card-content>
-      </ion-card>
-      
-    </ion-slide>
-    <ion-slide >
-      <ion-card (click)=" this.newsService.onGoToTopStoryPage(item)">
-        <ion-card-content>
-          <ion-img src="https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs3/107296334/original/8565b4c6c7d291892d22a9a32c1287638376edec/lets-design-some-banner-for-a-online-jewelry-shop.png"></ion-img>
-          <h2> <b>TItt </b></h2>
-          <h4>sdfsajdl</h4>
-        </ion-card-content>
-      </ion-card>
-      
-    </ion-slide>
-   </ion-slides>
-  <ion-toolbar color="mytheme" class="segmenttoolbarSection">
-      <ion-segment mode="md"  (ionChange)="seg($event)" scrollable="true" id="dag" class="segSection">
-        <ion-segment-button   [attr.id]="'seg_' + i" *ngFor="let item of data; let i = index;" no-margin no-padding (ionSelect)="update(i)"
-          class="my-btn" [value]="item.title" [ngClass]="{'btn-active':segment == item.title}">
-          <ion-text padding-horizontal class="text">{{item.title}}</ion-text>
-        </ion-segment-button>
-      </ion-segment>
-  </ion-toolbar>
-    
-   <ion-slides pager="false" [options]="slideOpts" (ionSlideDidChange)="change()" (click)="preventDefault($event)" #Slides>
-    <ion-slide>
-      <app-productlist [recieved_data]="sponsored"></app-productlist>
-    </ion-slide>
-    <ion-slide >
-      <app-productlist [recieved_data]="product_data_2"></app-productlist>
-    </ion-slide>
-    <ion-slide>
-      <app-productlist [recieved_data]="product_data_3"></app-productlist>
-    </ion-slide>
-    <ion-slide>
-      <app-productlist [recieved_data]="product_data_4"></app-productlist>
-    </ion-slide>
-    <ion-slide>
-      <app-productlist [recieved_data]="product_data_5"></app-productlist>
-    </ion-slide>
-    <ion-slide>
-      <app-productlist [recieved_data]="sponsored"></app-productlist>
-    </ion-slide>
-    <ion-slide>
-      <app-productlist [recieved_data]="product_data_2"></app-productlist>
-    </ion-slide>
-    <ion-slide>
-      <app-productlist [recieved_data]="sponsored"></app-productlist>
-    </ion-slide>
-    <ion-slide>
-      <app-productlist [recieved_data]="product_data_4"></app-productlist>
-    </ion-slide>
-    <ion-slide>
-      <app-productlist [recieved_data]="product_data_5"></app-productlist>
-    </ion-slide>
-    <ion-slide>
-      <app-productlist [recieved_data]="sponsored"></app-productlist>
-    </ion-slide>
-    <ion-slide>
-      <app-productlist [recieved_data]="product_data_2"></app-productlist>
-    </ion-slide>
-    <ion-slide>
-      <app-productlist [recieved_data]="product_data_3"></app-productlist>
-    </ion-slide>
-    <ion-slide>
-      <app-productlist [recieved_data]="product_data_4"></app-productlist>
-    </ion-slide>
-  </ion-slides> 
+  <div class="tree">
+    <div class="section-header">
+      <h3>Our Categories</h3>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-sm-6 col-xs-6 col-6" *ngFor="let category of categories" (click)="productlisting(category.id)">
+          <div class="about-us">
+            <div class="about-img">
+              <img class="backimg" src="{{imgurl+category.image}}" alt="">
+              <div class="sub-img">
+                <img src="http://cronicagroup.com/img/portfolio/pic-b.png" alt="">
+              </div>
+
+            </div>
+            <h2>{{category.category}}</h2>
+          </div>
+      </div>
+      <!-- <div class="col-md-4 col-sm-6 col-xs-6 col-6">
+        <a href="product02.html">
+          <div class="about-us">
+            <div class="about-img">
+              <img class="backimg" src="http://cronicagroup.com/img/portfolio/pic-02.jpg" alt="">
+              <div class="sub-img">
+                <img src="http://cronicagroup.com/img/portfolio/pic-c.png" alt="">
+              </div>
+            </div>
+            <h2>Led Lighting System</h2>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-6">
+        <a href="product03.html">
+          <div class="about-us">
+            <div class="about-img">
+              <img class="backimg" src="http://cronicagroup.com/img/portfolio/pic-03.jpg" alt="">
+              <div class="sub-img">
+                <img src="http://cronicagroup.com/img/portfolio/pic-d.png" alt="">
+              </div>
+            </div>
+            <h2>Wires &amp; Cables</h2>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-6">
+        <a href="product04.html">
+          <div class="about-us">
+            <div class="about-img">
+              <img class="backimg" src="http://cronicagroup.com/img/portfolio/pic-04.jpg" alt="">
+              <div class="sub-img">
+                <img src="http://cronicagroup.com/img/portfolio/pic-e.png" alt="">
+              </div>
+            </div>
+            <h2>Switchgears</h2>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-6">
+        <a href="product05.html">
+          <div class="about-us">
+            <div class="about-img">
+              <img class="backimg" src="http://cronicagroup.com/img/portfolio/pic-05.jpg" alt="">
+              <div class="sub-img">
+                <img src="http://cronicagroup.com/img/portfolio/pic-f.jpg" alt="">
+              </div>
+            </div>
+            <h2>MCB and DB’s</h2>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-6">
+        <a href="product06.html">
+          <div class="about-us">
+            <div class="about-img">
+              <img class="backimg" src="http://cronicagroup.com/img/portfolio/pic-06.jpg" alt="">
+              <div class="sub-img">
+                <img src="http://cronicagroup.com/img/portfolio/pic-g.png" alt="">
+              </div>
+            </div>
+            <h2>Home Appliances</h2>
+          </div>
+        </a>
+      </div> -->
+    </div>
+
+  </div>
 </ion-content>

@@ -27,8 +27,7 @@ import { ProductlistPage } from '../productlist/productlist.page';
       }
     ])
   ],
-  declarations: [HomePage, ProductlistPage
-  ],
-  entryComponents: [ProductlistPage]
+  declarations: [HomePage],
+  // entryComponents: [ProductlistPage]
 })
 export class HomePageModule {}

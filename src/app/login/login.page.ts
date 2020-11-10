@@ -13,6 +13,10 @@ import { MenuController, ModalController, Platform } from '@ionic/angular';
 import { InfomodalPage } from '../infomodal/infomodal.page';
 import { DataService } from '../data.service';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from '../api/api.service';
+import { Router } from '@angular/router';
+import { LOGIN } from '../config';
 
 @Component({
   selector: 'app-login',
@@ -21,8 +25,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 })
 export class LoginPage implements OnInit {
 
-  email = 'demo';
-  password = 'demo';
+  validations_form: FormGroup;
 
   constructor(
     private platform: Platform,
@@ -30,7 +33,19 @@ export class LoginPage implements OnInit {
     private fun: FunctionsService,
     private menuCtrl: MenuController,
     private modalController: ModalController,
-    private data: DataService) {
+    private data: DataService,
+    private formBuilder: FormBuilder,
+    private api:ApiService,
+    private router:Router) {
+      this.validations_form = this.formBuilder.group({
+        email: new FormControl('', Validators.compose([
+          Validators.required,  
+          Validators.email,
+        ])),
+        password: new FormControl('', Validators.compose([  
+          Validators.required,
+        ]))
+       });
   }
 
   ngOnInit() {
@@ -42,18 +57,34 @@ export class LoginPage implements OnInit {
     this.splashScreen.hide();
   }
 
-  signin() {
-    this.platform.ready().then(() => {
-      if (this.platform.is('cordova')) {
-        if (this.fun.validateEmail(this.email) && this.password == '') {
-          this.fun.navigate('home', false);
-        } else {
-          this.fun.presentToast('Wrong Input!', true, 'bottom', 2100);
-        }
-      } else {
-        this.fun.navigate('home', false);
-      }
-    });
+  signin(value) {
+    this.api.presentLoading();
+    if(this.validations_form.invalid)
+    {
+      setTimeout(() => {
+        this.api.dismissLoading();
+      }, 2000);
+      this.api.presentToast("Please enter all details");
+    }
+    else{
+      var formdata = new FormData();
+      formdata.append("email", value.email);
+      formdata.append("password", value.password);
+      formdata.append("one_singnal", '11');
+      this.api.Post(LOGIN,formdata).then(data=>{
+        console.log(data);
+        this.api.setToken(data['success'].token);
+        setTimeout(() => {
+          this.api.dismissLoading();
+        }, 2000);
+        this.router.navigate(['home']);
+      }).catch(d=>{
+        console.log(d);
+        this.api.dismissLoading();
+        this.api.presentToast(d.error.errors);
+      })
+
+    }
 
   }
 

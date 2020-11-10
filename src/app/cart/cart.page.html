@@ -44,17 +44,17 @@
             </ion-col>
             <ion-col size="6">
               <h3 no-margin class="item-name">{{item.product.name}}</h3>
-              <h5 no-margin class="item-def">{{item.product.size}}, {{item.product.color}}</h5>
+              <!-- <h5 no-margin class="item-def">{{item.product.size}}, {{item.product.color}}</h5>
               <h5 no-margin class="item-def">shipping: {{item.product.currency}}{{item.product.shipping}}</h5>
-              <h5 no-margin class="item-def">Dec 31 - Jan 17</h5>
+              <h5 no-margin class="item-def">Dec 31 - Jan 17</h5> -->
             </ion-col>
             <ion-col size="3" float-right>
-              <ion-row text-end justify-content-end>
+              <!-- <ion-row text-end justify-content-end>
                 <h3 no-margin class="item-name" *ngIf="item.product.offer" text-end>{{item.product.currency}}{{fun.calculate(item.product.cost_price,
                   item.product.discount)}}</h3>
                 <h3 no-margin class="item-name" *ngIf="item.product.offer" text-end><span class="cut">{{item.product.currency}}{{item.product.cost_price}}</span></h3>
                 <h3 no-margin class="item-name" *ngIf="!item.product.offer" text-end>{{item.product.currency}}{{item.product.cost_price}}</h3>
-              </ion-row>
+              </ion-row> -->
               <ion-row justify-content-end>
                 <ion-select placeholder="-" interface="popover" [interfaceOptions]="customAlertOptions" [(ngModel)]='item.quantity'
                   class="select">
@@ -74,7 +74,7 @@
     <ion-row size="12" justify-content-center disabled="true">
         <ion-button fill="outline" color="primary" (click)="browse()">Continue shopping</ion-button>
       </ion-row>
-    <ion-row margin>
+    <!-- <ion-row margin>
       <ion-text><strong class="text">Order Summary</strong></ion-text>
     </ion-row>
     <ion-item lines="none" class="card" no-margin>
@@ -133,7 +133,7 @@
           </ion-text>
         </ion-col>
       </ion-row>
-    </div>
+    </div> -->
   </div>
 </ion-content>
 <ion-footer *ngIf="show" (click)="fun.checkout()">

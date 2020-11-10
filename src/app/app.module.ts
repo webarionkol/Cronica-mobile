@@ -19,6 +19,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { InfomodalPage } from './infomodal/infomodal.page';
 import { HttpClientModule } from '@angular/common/http'
+import { ApiService } from './api/api.service';
 @NgModule({
   declarations: [AppComponent, InfomodalPage],
   entryComponents: [InfomodalPage],
@@ -31,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http'
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    ApiService
   ],
   bootstrap: [AppComponent]
 })

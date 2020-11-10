@@ -12,14 +12,14 @@
     <ion-buttons slot="start">
       <ion-back-button color="light"></ion-back-button>
     </ion-buttons>
-    <ion-title color="light">Billing</ion-title>
+    <ion-title color="light">Checkout</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
   <ion-list no-margin>
-    <ion-radio-group>
+    <!-- <ion-radio-group>
       <ion-list-header color="light">
         <ion-label>Select payment method</ion-label>
       </ion-list-header>
@@ -42,15 +42,15 @@
         <ion-radio slot="start" value="{{i}}" checked></ion-radio>
       </ion-item>
 
-    </ion-radio-group>
+    </ion-radio-group> -->
   </ion-list>
-  <ion-row justify-content-center padding-top padding-bottom>
+  <!-- <ion-row justify-content-center padding-top padding-bottom>
     <ion-text color="primary" (click)="addPayment()">
       {{addNewPayment ? 'Cancel' : 'Add new payment method'}}
     </ion-text>
-  </ion-row>
+  </ion-row> -->
 
-  <div *ngIf="addNewPayment" class="add-payment-div">
+  <!-- <div *ngIf="addNewPayment" class="add-payment-div">
     <ion-row>
       <ion-col>
         <ion-text><span class="label">Credit/Debit Number</span></ion-text>
@@ -85,7 +85,7 @@
         <h6 class="small">Trusted by over 500 million shoppers in 50 countries</h6>
       </ion-col>
     </ion-row>
-  </div>
+  </div> -->
   <ion-list>
     <ion-radio-group>
       <ion-list-header color="light">
