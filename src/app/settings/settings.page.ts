@@ -21,13 +21,13 @@ import { DataService } from '../data.service';
 export class SettingsPage implements OnInit {
 
   items = [
-    { name: 'Notifications', url: 'notificationssettings' },
-    { name: 'Email Settings', url: 'emailsettings' },
-    { name: 'Account Settings', url: 'accountsettings' },
-    { name: 'Manage Addresses', url: 'addressbook' },
-    { name: 'Manage Payments', url: 'managepayments' },
-    { name: 'Currency Settings', url: 'currencysettings' },
-    { name: 'Data Control', url: 'datacontrol' },
+    { name: 'About Us', url: 'notificationssettings' },
+    { name: 'Contact Us', url: 'emailsettings' },
+    // { name: 'Account Settings', url: 'accountsettings' },
+    // { name: 'Manage Addresses', url: 'addressbook' },
+    // { name: 'Manage Payments', url: 'managepayments' },
+    // { name: 'Currency Settings', url: 'currencysettings' },
+    // { name: 'Data Control', url: 'datacontrol' },
     { name: 'Logout', url: 'login' }
   ];
 

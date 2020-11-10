@@ -25,7 +25,7 @@ export class AppComponent {
 
   public appPages = [
     { title: 'Home', url: '/home', icon: 'home' },
-    { title: 'Search', url: '/search', modal: true, icon: 'search' },
+    // { title: 'Search', url: '/search', modal: true, icon: 'search' },
     // { title: 'Notifications', url: '/notification', icon: 'notifications' },
     { title: 'Shopping Cart', url: '/cart', icon: 'cart' },
     { title: 'Order History', url: '/orders', icon: 'list' },
@@ -34,9 +34,10 @@ export class AppComponent {
     // { title: 'Apply Promo', url: '/applypromo', icon: 'megaphone' }
   ];
   public appPages1 = [
-    { title: 'Customer Support', url: '/support', icon: 'people' },
-    { title: 'FAQs', url: '/faqs', icon: 'help-circle' },
-    { title: 'Settings', url: '/settings', icon: 'cog' }
+    // { title: 'Customer Support', url: '/support', icon: 'people' },
+   
+    { title: 'Settings', url: '/settings', icon: 'cog' },
+    // { title: 'Logout', url: '/faqs', icon: 'help-circle' },
   ];
 
   colors = [
