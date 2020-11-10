@@ -25,12 +25,7 @@ import { LOGIN } from '../config';
 })
 export class LoginPage implements OnInit {
 
-<<<<<<< HEAD
   validations_form: FormGroup;
-=======
-  email = 'demo@gmail.com';
-  password = 'demo';
->>>>>>> a8a2b4b570a10aef26ba1d2519bf2ca9ab3eca13
 
   constructor(
     private platform: Platform,
@@ -62,7 +57,6 @@ export class LoginPage implements OnInit {
     this.splashScreen.hide();
   }
 
-<<<<<<< HEAD
   signin(value) {
     this.api.presentLoading();
     if(this.validations_form.invalid)
@@ -91,21 +85,6 @@ export class LoginPage implements OnInit {
       })
 
     }
-=======
-  signin() {
-    this.platform.ready().then(() => {
-      if (this.platform.is('cordova')) {
-        if (this.fun.validateEmail(this.email) && this.password == '') {
-          this.fun.navigate('home', false);
-        } else {
-          this.fun.navigate('home', false);
-          // this.fun.presentToast('Wrong Input!', true, 'bottom', 2100);
-        }
-      } else {
-        this.fun.navigate('home', false);
-      }
-    });
->>>>>>> a8a2b4b570a10aef26ba1d2519bf2ca9ab3eca13
 
   }
 
