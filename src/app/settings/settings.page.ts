@@ -28,7 +28,7 @@ export class SettingsPage implements OnInit {
     // { name: 'Manage Payments', url: 'managepayments' },
     // { name: 'Currency Settings', url: 'currencysettings' },
     // { name: 'Data Control', url: 'datacontrol' },
-    { name: 'Logout', url: 'login' }
+    { name: 'Logout', url: 'login'}
   ];
 
   constructor(private navCtrl: NavController, private fun: FunctionsService, private menuCtrl: MenuController, private page: NavController, private dataService: DataService, private modalController: ModalController) { }
@@ -51,6 +51,7 @@ export class SettingsPage implements OnInit {
   }
 
   logout(){
+    localStorage.clear();
     this.page.navigateRoot('/login');
   }
 

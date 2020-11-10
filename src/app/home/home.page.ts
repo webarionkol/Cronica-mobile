@@ -99,6 +99,12 @@ export class HomePage {
     }
   }
 
+  productlisting(id)
+  {
+    // console.log(id);
+    this.router.navigate(['productlist'],{queryParams:{id:id}});
+  }
+
   ionViewDidEnter() {
     this.menuCtrl.enable(true, 'start');
     this.menuCtrl.enable(true, 'end');

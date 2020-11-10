@@ -8,11 +8,12 @@
  * 
  */
 import { Component } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { DataService } from './data.service';
 import { FunctionsService } from './functions.service';
+import { ApiService } from './api/api.service';
 
 @Component({
   selector: 'app-root',
@@ -80,7 +81,9 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public dataService: DataService,
-    public fun: FunctionsService
+    public fun: FunctionsService,
+    private api:ApiService,
+    public navCtrl:NavController,
   ) {
     this.initializeApp();
   }
@@ -89,6 +92,15 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.statusBar.backgroundColorByHexString('#ffffff');
+      if(!this.api.getToken())
+      {
+        this.api.presentToast("Please Login");
+        this.navCtrl.navigateRoot(['login']);
+      }
+      else
+      {
+        this.navCtrl.navigateRoot(['home']);
+      }
       // this.splashScreen.hide();
     });
   }
