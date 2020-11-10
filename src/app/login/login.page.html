@@ -15,15 +15,16 @@
 
 <ion-content padding>
   <ion-text><h3 no-margin margin-bottom text-center class="title">Sign In</h3></ion-text>
+  <form [formGroup]="validations_form"  (ngSubmit)="signin(validations_form.value)">
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-input clearInput type="email" placeholder="Email" [(ngModel)]="email" class="input" padding-horizontal></ion-input>
+        <ion-input clearInput type="email" placeholder="Email" formControlName="email"  class="input" padding-horizontal></ion-input>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-input clearInput type="password" placeholder="Password" [(ngModel)]="password" class="input" padding-horizontal></ion-input>
+        <ion-input clearInput type="password" placeholder="Password" formControlName="password"  class="input" padding-horizontal></ion-input>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -33,7 +34,7 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-button expand="block" (click)="signin()" color="mytheme"><strong class="white">Sign In</strong></ion-button>
+        <ion-button expand="block" type="submit" color="mytheme"><strong class="white">Sign In</strong></ion-button>
       </ion-col>
     </ion-row>
     <div class="line"></div>
@@ -56,4 +57,5 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  </form>
 </ion-content>

@@ -11,7 +11,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'signup', loadChildren: './signup/signup.module#SignupPageModule' },
@@ -44,7 +44,11 @@ const routes: Routes = [
   { path: 'accountsettings', loadChildren: './accountsettings/accountsettings.module#AccountsettingsPageModule' },
   { path: 'country', loadChildren: './country/country.module#CountryPageModule' },
   { path: 'changeemail', loadChildren: './changeemail/changeemail.module#ChangeemailPageModule' },
-  { path: 'changepassword', loadChildren: './changepassword/changepassword.module#ChangepasswordPageModule' }
+  { path: 'changepassword', loadChildren: './changepassword/changepassword.module#ChangepasswordPageModule' },
+  { path: 'otp', loadChildren: './otp/otp.module#OtpPageModule' },
+  { path: 'forget', loadChildren: './forget/forget.module#ForgetPageModule' }
+
+
 ];
 
 @NgModule({

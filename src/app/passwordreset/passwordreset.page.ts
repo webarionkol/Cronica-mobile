@@ -10,6 +10,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FunctionsService } from '../functions.service';
 import { MenuController } from '@ionic/angular';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from '../api/api.service';
+import { Router } from '@angular/router';
+import { FORGETPASSWORD } from '../config';
 
 @Component({
   selector: 'app-passwordreset',
@@ -17,10 +21,16 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./passwordreset.page.scss'],
 })
 export class PasswordresetPage implements OnInit {
-
-  email = "";
-
-  constructor(private fun: FunctionsService, private menuCtrl: MenuController) { 
+  
+  validations_form: FormGroup;
+  constructor(private fun: FunctionsService, private menuCtrl: MenuController,
+    private formBuilder: FormBuilder,private api:ApiService,private router:Router) { 
+      this.validations_form = this.formBuilder.group({
+        email: new FormControl('', Validators.compose([
+          Validators.required,  
+          Validators.email,
+        ])),
+       });
   }
 
   ngOnInit() {
@@ -31,13 +41,42 @@ export class PasswordresetPage implements OnInit {
     this.menuCtrl.enable(false, 'end');
   }
 
-  reset(){
-    if(this.fun.validateEmail(this.email)){
-      this.fun.presentToast('Verification mail sent', false, 'bottom', 2100);
+  reset(value){
+    this.api.presentLoading();
+    if(this.validations_form.invalid)
+    {
+      setTimeout(() => {
+        this.api.dismissLoading();
+      }, 2000);
+      this.api.presentToast("Please enter all details");
     }
     else{
-      this.fun.presentToast('Wrong Input!', true, 'bottom', 2100);
+      var formdata = new FormData();
+      formdata.append("email", value.email);
+      this.api.Post(FORGETPASSWORD,formdata).then(data=>{
+        console.log(data);
+        // this.api.setToken(data['success'].token);
+        if(data['error'])
+        {
+          this.api.presentToast(data['error']);
+        }
+        else
+        {
+          console.log("else condition");
+          localStorage.setItem('email', value.email);
+          this.router.navigate(['otp'],{queryParams:{email:"forget_password"}});
+        }
+        setTimeout(() => {
+          this.api.dismissLoading();
+        }, 2000);
+      }).catch(d=>{
+        console.log(d);
+        this.api.dismissLoading();
+        this.api.presentToast(d.error.errors);
+      })
+
     }
+
   }
 
 }

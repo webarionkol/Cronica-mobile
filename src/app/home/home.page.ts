@@ -11,7 +11,10 @@ import { Component, ViewChild } from '@angular/core';
 import { MenuController, IonSlides } from '@ionic/angular';
 import { FunctionsService } from '../functions.service';
 import { DataService, HomeTab, Product } from '../data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
+import { ApiService } from '../api/api.service';
+import { HOME, imgUrl } from '../config';
 
 @Component({
   selector: 'app-home',
@@ -20,10 +23,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomePage {
 
+  response_data:any;
+  app_banners:any;
+  categories:any;
+  new_arrival:any;
+  imgurl:any=imgUrl;
+
   @ViewChild('Slides') slides: IonSlides;
 
   segment = '';
   index = 0;
+  
   data: Array<HomeTab> = [];
   sponsored: Array<Product> = [];
   product_data_1: Array<Product> = [];
@@ -44,7 +54,36 @@ export class HomePage {
     private activatedRoute: ActivatedRoute,
     private menuCtrl: MenuController,
     private fun: FunctionsService,
-    private dataService: DataService) {
+    private dataService: DataService,
+    private api:ApiService,
+    private router:Router) {
+      this.api.Get(HOME).then(data=>{
+        console.log(data);
+        this.response_data=data['body'];
+        this.response_data.forEach(element => {
+          if(element.category=="app_banners")
+          {
+            this.app_banners=element.app_banners;
+          }
+          else if(element.category=="categories")
+          {
+            this.categories=element.categories;
+          }
+          else if(element.category=="new_arrival")
+          {
+            this.new_arrival=element.new_arrival;
+          }
+        });
+        console.log(this.categories);
+        console.log(this.new_arrival);
+        console.log(this.app_banners);
+      }).catch(d=>{
+        console.log(d);
+      })
+
+
+
+
     this.data = dataService.tabs;
     this.sponsored = dataService.sponsored;
     this.product_data_1 = dataService.products_1;

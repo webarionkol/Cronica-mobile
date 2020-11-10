@@ -15,28 +15,60 @@
   
   <ion-content padding>
     <ion-text><h3 no-margin margin-bottom text-center class="title">Sign Up</h3></ion-text>
+    <form [formGroup]="validations_form"  (ngSubmit)="signup(validations_form.value)" >
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-input type="text" placeholder="First Name" [(ngModel)]="first_name" class="input" padding-horizontal></ion-input>
+          <ion-input type="text" placeholder="First Name" formControlName="first_name" padding-horizontal></ion-input>
         </ion-col>
         <ion-col>
-          <ion-input type="text" placeholder="Last Name" [(ngModel)]="last_name" class="input" padding-horizontal></ion-input>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-input clearInput type="email" placeholder="Email" [(ngModel)]="email" class="input" padding-horizontal></ion-input>
+          <ion-input type="text" placeholder="Last Name" formControlName="last_name" padding-horizontal></ion-input>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-input clearInput type="password" placeholder="Password" [(ngModel)]="password" class="input" padding-horizontal></ion-input>
+          <ion-input clearInput type="email" placeholder="Email" formControlName="email" padding-horizontal></ion-input>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-button expand="block" color="primary" (click)="signup()" color="mytheme"><strong class="white">Create an Account</strong></ion-button>
+          <ion-input clearInput type="number" placeholder="Mobile No." formControlName="mobile_no" padding-horizontal></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input clearInput type="password" placeholder="Password" formControlName="password" padding-horizontal></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input clearInput type="text" placeholder="City" formControlName="city" padding-horizontal></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input clearInput type="text" placeholder="State" formControlName="state" padding-horizontal></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input clearInput type="text" placeholder="Country" formControlName="country" padding-horizontal></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input clearInput type="text" placeholder="Register Type" formControlName="register_type" padding-horizontal></ion-input>
+        </ion-col>
+      </ion-row>
+     
+      <ion-row>
+        <ion-col>
+          <ion-input clearInput type="text" placeholder="Address" formControlName="address" padding-horizontal></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" type="submit" color="primary"  color="mytheme"><strong class="white">Create an Account</strong></ion-button>
         </ion-col>
       </ion-row>
       <div class="line"></div>
@@ -59,5 +91,6 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+   </form>
   </ion-content>
   
