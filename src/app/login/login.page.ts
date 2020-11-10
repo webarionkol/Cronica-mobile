@@ -21,7 +21,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 })
 export class LoginPage implements OnInit {
 
-  email = 'demo';
+  email = 'demo@gmail.com';
   password = 'demo';
 
   constructor(
@@ -48,7 +48,8 @@ export class LoginPage implements OnInit {
         if (this.fun.validateEmail(this.email) && this.password == '') {
           this.fun.navigate('home', false);
         } else {
-          this.fun.presentToast('Wrong Input!', true, 'bottom', 2100);
+          this.fun.navigate('home', false);
+          // this.fun.presentToast('Wrong Input!', true, 'bottom', 2100);
         }
       } else {
         this.fun.navigate('home', false);

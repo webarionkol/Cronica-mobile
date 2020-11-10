@@ -96,4 +96,5 @@ export class HomePage {
   update(i) {
     this.slides.slideTo(i).then((res) => console.log('responseSlideTo', res));
   }
+
 }
