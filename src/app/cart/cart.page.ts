@@ -12,6 +12,8 @@ import { Cart, DataService } from '../data.service';
 import { FunctionsService } from '../functions.service';
 import { InfomodalPage } from '../infomodal/infomodal.page';
 import { ModalController, IonList, NavController, MenuController, AlertController } from '@ionic/angular';
+import { ApiService } from '../api/api.service';
+import { CART, imgUrl } from '../config';
 
 @Component({
   selector: 'app-cart',
@@ -19,7 +21,9 @@ import { ModalController, IonList, NavController, MenuController, AlertControlle
   styleUrls: ['./cart.page.scss'],
 })
 export class CartPage implements OnInit {
-
+user:any;
+cart:any;
+imgurl:any=imgUrl;
   @ViewChild('slidingList') slidingList: IonList;
 
   customAlertOptions: any = {
@@ -38,8 +42,31 @@ export class CartPage implements OnInit {
     public fun: FunctionsService,
     private modalController: ModalController,
     private nav: NavController,
-    public alertController: AlertController) {
-    this.data = dataService.cart;
+    public alertController: AlertController,
+    private api:ApiService) {
+      this.api.presentLoading();
+      this.user=this.api.getUserInfo();
+      
+      this.api.Get(CART+"/show?user_id="+this.user.id).then(data=>{
+        console.log(data);
+        if(data['status']==200)
+        {
+          this.cart=data['data'];
+        }
+        setTimeout(() => {
+          this.api.dismissLoading();
+        }, 2000);
+      }).catch(d=>{
+        console.log(d);
+        if(d.status==400)
+        {
+          this.cart=[];
+        }
+        setTimeout(() => {
+          this.api.dismissLoading();
+        }, 2000);
+      })
+    
     if (this.data.length === 0) { this.show = false; }
     for (let i = 1; i <= 36; i++) { this.qty.push(i); }
   }
@@ -101,17 +128,96 @@ export class CartPage implements OnInit {
     this.fun.navigate('/home', false);
   }
 
-  async remove(j) {
-    this.fun.removeConform().then(res => {
-      console.log('res conform', res);
-      if (res === 'ok') {
-        this.slidingList.closeSlidingItems();
-        this.data.splice(j, 1);
-        if (this.data.length === 0) {
-          this.show = !this.show;
-        }
-      }
-    });
-  }
+   remove(id) {
+   console.log(id);
+   this.api.presentLoading();
+   this.api.Delete(CART+"/Delete?cart_id="+id+"&user_id="+this.user.id).then(data=>{
+     console.log(data);
+     if(data['status']==200)
+     {
+      this.api.updateCart();
+       this.api.presentToast("Product deleted Successfully");
+       
+          
+        this.api.Get(CART+"/show?user_id="+this.user.id).then(data=>{
+          console.log(data);
+          if(data['status']==200)
+          {
+            this.cart=data['data'];
+          }
+          setTimeout(() => {
+            this.api.dismissLoading();
+          }, 2000);
+        }).catch(d=>{
+          console.log(d);
+          if(d.status==400)
+          {
+            this.cart=[];
+          }
+          setTimeout(() => {
+            this.api.dismissLoading();
+          }, 2000);
+        })
 
+        
+     }
+    
+   }).catch(d=>{
+     console.log(d);
+     setTimeout(()=>{
+      this.api.dismissLoading();
+    },2000);
+   })
+  }
+  updateCart(cart_id,type)
+  {
+    console.log(cart_id);
+    console.log(type);
+    var response=this.cart.find(x=>x.cart_id==cart_id);
+    console.log(response);
+    if(response.count==1&&type==-1)
+    {
+      console.log("if condition");
+      this.remove(response.cart_id);
+    }
+    else
+    {
+      this.api.presentLoading();
+      var count=Number(response.count)+Number(type);
+      console.log(count);
+      this.api.Put(CART+"/update?cart_id="+response.cart_id+"&user_id="+this.user.id+"&count="+count).then(data=>{
+        console.log(data);
+        if(data['status']==201)
+        {
+                  this.api.updateCart();
+                  this.api.presentToast("Quantity updated Successfully");
+                  this.api.Get(CART+"/show?user_id="+this.user.id).then(data=>{
+                    console.log(data);
+                    if(data['status']==200)
+                    {
+                      this.cart=data['data'];
+                    }
+                    setTimeout(() => {
+                      this.api.dismissLoading();
+                    }, 2000);
+                  }).catch(d=>{
+                    console.log(d);
+                    if(d.status==400)
+                    {
+                      this.cart=[];
+                    }
+                    setTimeout(() => {
+                      this.api.dismissLoading();
+                    }, 2000);
+                  })
+
+        }
+      }).catch(d=>{
+        setTimeout(() => {
+          this.api.dismissLoading();
+        }, 2000);
+        console.log(d);
+      })
+    }
+  }
 }

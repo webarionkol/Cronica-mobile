@@ -8,10 +8,10 @@
  */ -->
 
 <ion-row>
-  <ion-col *ngFor="let data of recieved_data;" size="6">
-    <ion-card class="card" no-margin (click)="open(data)">
+  <ion-col *ngFor="let data of recent_product;" size="6">
+    <ion-card class="card" no-margin (click)="open(data.product_id)">
       <ion-badge class="badge" *ngIf="data.offer">{{data.discount}}%</ion-badge>
-      <img [src]="data.image[0]" [alt]="data.name">
+      <img [src]="imgurl+data.image" [alt]="data.product_name">
       <ion-card-content>
         <ion-card-title>
           <ion-row>
@@ -24,7 +24,7 @@
           </ion-row>
           <ion-row>
             <ion-col text-left no-padding>
-              <h6 text-left class="subtitle">{{data.bought}}+ bought this</h6>
+              <h6 text-left class="subtitle">{{data.product_name}}</h6>
             </ion-col>
           </ion-row>
         </ion-card-title>

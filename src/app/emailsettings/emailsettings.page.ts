@@ -9,6 +9,8 @@
  */
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { ApiService } from '../api/api.service';
+import { CONTACT } from '../config';
 import { FunctionsService } from '../functions.service';
 
 @Component({
@@ -18,7 +20,23 @@ import { FunctionsService } from '../functions.service';
 })
 export class EmailsettingsPage implements OnInit {
 
-  constructor(private menuCtrl: MenuController, private fun: FunctionsService) { }
+  data:any;
+
+  constructor(private menuCtrl: MenuController, private fun: FunctionsService,private api:ApiService) {
+    this.api.presentLoading();
+    this.api.Get(CONTACT).then(data=>{
+      this.data=data['data'];
+      setTimeout(() => {
+        this.api.dismissLoading();
+      }, 2000);
+      console.log(data);
+    }).catch(d=>{
+      setTimeout(() => {
+        this.api.dismissLoading();
+      }, 2000);
+      console.log(d);
+    })
+   }
 
   ngOnInit() {
   }

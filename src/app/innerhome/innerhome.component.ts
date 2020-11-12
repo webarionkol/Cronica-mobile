@@ -11,7 +11,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../data.service';
 import { FunctionsService } from '../functions.service';
 import { NavController } from '@ionic/angular';
-import { NavigationExtras } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
+import { imgUrl } from '../config';
 
 @Component({
   selector: 'app-innerhome',
@@ -22,16 +23,17 @@ import { NavigationExtras } from '@angular/router';
 export class InnerhomeComponent implements OnInit {
 
   @Input() recieved_data: Array<Product>;
-
-  constructor(private fun: FunctionsService, private nav: NavController) {
+  @Input() recent_product;
+  imgurl:any=imgUrl;
+  constructor(private fun: FunctionsService, private nav: NavController,private router:Router) {
   }
 
   ngOnInit() {
   }
 
-  open(data){
-    this.fun.update(data);
-    this.nav.navigateForward('/productdetail');
+  open(id){
+    // this.fun.update(data);
+    this.router.navigate(['productdetail'],{queryParams:{id:id}});
   }
 
 }

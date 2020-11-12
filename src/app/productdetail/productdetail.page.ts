@@ -11,6 +11,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FunctionsService } from '../functions.service';
 import { DataService, Product, HomeTab } from '../data.service';
 import { IonSlides, MenuController, NavController, IonContent } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../api/api.service';
+import { CART, PRODUCTDETAIL } from '../config';
 
 @Component({
   selector: 'app-productdetail',
@@ -19,6 +22,8 @@ import { IonSlides, MenuController, NavController, IonContent } from '@ionic/ang
 })
 export class ProductdetailPage implements OnInit {
 
+  category_id:any;
+  user:any;
   @ViewChild('Slides') slides: IonSlides;
   @ViewChild('Content') content: IonContent;
   @ViewChild('slider') slider: IonSlides;
@@ -33,16 +38,41 @@ export class ProductdetailPage implements OnInit {
   data: Array<HomeTab> = [];
 
   product: Product;
-
+  product_detail:any;
+  recent_product:any;
   constructor(
     private menuCtrl: MenuController,
     private fun: FunctionsService,
     private dataService: DataService,
-    private nav: NavController) {
-
+    private nav: NavController,
+    private route:ActivatedRoute,
+    private api:ApiService) {
+      this.user=this.api.getUserInfo();
+      this.api.presentLoading();
+    this.route.queryParams.subscribe(data=>{
+      this.category_id=data.category_id;
+      this.api.Put(PRODUCTDETAIL+"/"+data.id).then(data=>{
+        console.log(data);
+        this.segment="Overview";
+        this.product_detail=data['data'];
+        this.recent_product=data['recent_product'];
+        console.log(this.product_detail);
+        setTimeout(() => {
+          this.api.dismissLoading();
+        }, 1000);
+      }).catch(d=>{
+        console.log(d);
+        setTimeout(() => {
+          this.api.dismissLoading();
+        }, 1000);
+        this.api.presentToast("No Products");
+      })
+    })
     this.product = dataService.current_product;
     this.data = dataService.item_tab;
     this.segment = this.data[0].title;
+    console.log(this.data);
+    console.log(this.segment);
   }
 
   ngOnInit() {
@@ -69,7 +99,35 @@ export class ProductdetailPage implements OnInit {
   }
 
   goToCart() {
-    this.fun.navigate('cart', false);
+    // this.fun.navigate('cart', false);
+    this.api.presentLoading();
+    var obj={
+      "data": [{
+        "category": this.category_id,
+        "count": 1,
+        "productId": this.product_detail.id,
+        "productName": this.product_detail.productname,
+        "userid": this.user.id
+      }]
+    }
+    
+    this.api.Post(CART,obj).then(data=>{
+      console.log(data);
+      if(data['status']==200)
+      {
+        
+        this.api.updateCart();
+      }
+      setTimeout(() => {
+        this.api.dismissLoading();
+      }, 2000);
+    }).catch(d=>{
+      setTimeout(() => {
+        this.api.dismissLoading();
+      }, 2000);
+      console.log(d);
+      this.api.presentToast("Product already exist to your cart");
+    })
   }
 
   update(i) {
@@ -87,6 +145,7 @@ export class ProductdetailPage implements OnInit {
   }
 
   seg(event) {
+    console.log(event);
     this.segment = event.detail.value;
   }
 

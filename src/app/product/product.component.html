@@ -11,14 +11,15 @@
   <ion-row padding-0>
     <ion-col padding-0 class="padding-0">
       <ion-slides pager="true" [options]="slideOpts">
-        <ion-slide *ngFor="let i of product.image;">
-          <img class="image" [src]="i">
+        <!-- <ion-slide *ngFor="let i of product.image;"> -->
+          <ion-slide *ngIf="product_detail">
+          <img class="image" [src]="imgurl+product_detail.image">
           <div class="product-image-overlay"></div>
         </ion-slide>
       </ion-slides>
-      <ion-badge class="badge">
+      <!-- <ion-badge class="badge">
         <ion-icon name="images"></ion-icon>{{product.image.length}}
-      </ion-badge>
+      </ion-badge> -->
       <ion-row justify-content-end class="hover-buttons">
         <ion-icon size="small" float-right name="logo-instagram" class="fab" (click)="shareViaInstagram(product.image[0])"></ion-icon>
         <ion-icon size="small" float-right name="share" class="fab" (click)="shareCommon(product.image[0])"></ion-icon>
@@ -29,8 +30,8 @@
   </ion-row>
   <div padding>
 
-    <ion-row lines="none" class="row">
-      <ion-text class="name">{{product.name}}</ion-text>
+    <ion-row lines="none" class="row" *ngIf="product_detail">
+      <ion-text class="name">{{product_detail.productname}}</ion-text>
     </ion-row>
     <!-- <ion-row>
       <ion-icon name="star" color="mytheme" *ngFor="let i of fun.array(product.rating)"></ion-icon>
@@ -105,7 +106,8 @@
       </ion-row>
       <ion-row class="full" margin-top *ngIf="open[1]">
         <ion-col>
-          <span float-left>{{product.description}}</span>
+          <!-- <span float-left>{{product_detail.description}}</span> -->
+          <div [innerHtml]="product_detail.description"></div>
         </ion-col>
       </ion-row>
       <div class="sep"></div>

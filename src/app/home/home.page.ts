@@ -28,7 +28,7 @@ export class HomePage {
   categories:any;
   new_arrival:any;
   imgurl:any=imgUrl;
-
+  total_quantity:any;
   @ViewChild('Slides') slides: IonSlides;
 
   segment = '';
@@ -57,6 +57,8 @@ export class HomePage {
     private dataService: DataService,
     private api:ApiService,
     private router:Router) {
+      this.total_quantity=this.api.total_cart_product;
+      console.log(this.api.total_cart_product);
       this.api.Get(HOME).then(data=>{
         console.log(data);
         this.response_data=data['body'];

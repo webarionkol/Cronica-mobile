@@ -4,6 +4,7 @@ import { apiUrl, CART } from '../config';
 import { ToastController, LoadingController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,18 +13,41 @@ export class ApiService {
   @Output() Address:EventEmitter<any> = new EventEmitter();
  cart:any;
  location:any;
+ total_cart_product:any;
   constructor(public http: HttpClient, public toastController: ToastController,
     public loadingController: LoadingController,public alertController: AlertController,
     private route:Router) {
-    
+    if(localStorage.getItem('cart'))
+    {
+      this.total_cart_product=(this.getCart()).length;
+    }
+    }
+
+    public Put(api){
+      // let header = new HttpHeaders().set("token",this.getToken());
+      let header = new HttpHeaders().set(
+        "Authorization",
+         'Bearer'+" "+this.getToken()
+      );
+      return new Promise((resolve, reject) => {
+        this.http.put(apiUrl + api,{},{headers:header})
+          .subscribe(res => {
+            resolve(res);
+          }, (err) => {
+            reject(err);
+          });
+      });
     }
 
 
   public Get(api) {
     // let header = new HttpHeaders().set("token",this.getToken());
+    let header = new HttpHeaders().set(
+      "Authorization",
+       'Bearer'+" "+this.getToken()
+    );
     return new Promise((resolve, reject) => {
-      // this.http.get(apiUrl + api,{headers:header})
-      this.http.get(apiUrl + api)
+      this.http.get(apiUrl + api,{headers:header})
         .subscribe(res => {
           resolve(res);
         }, (err) => {
@@ -34,9 +58,12 @@ export class ApiService {
 
   public Post(api, formData) {
     // let header = new HttpHeaders().set("token",this.getToken());
+    let header = new HttpHeaders().set(
+      "Authorization",
+       'Bearer'+" "+this.getToken()
+    );
     return new Promise((resolve, reject) => {
-      // this.http.post(apiUrl + api, formData,{headers:header})
-      this.http.post(apiUrl + api, formData)
+      this.http.post(apiUrl + api, formData,{headers:header})
         .subscribe(res => {
           resolve(res);
         }, (err) => {
@@ -58,7 +85,11 @@ export class ApiService {
 
 
   public Delete(api){
-    let header = new HttpHeaders().set("token",this.getToken());
+    // let header = new HttpHeaders().set("token",this.getToken());
+    let header = new HttpHeaders().set(
+      "Authorization",
+       'Bearer'+" "+this.getToken()
+    );
     return new Promise((resolve, reject) => {
       this.http.delete(apiUrl + api,{headers:header})
         .subscribe(res => {
@@ -68,6 +99,44 @@ export class ApiService {
         });
     });
   }
+
+  updateCart(){
+    var user=this.getUserInfo();
+    this.Get(CART+"/show?user_id="+user.id).then(data=>{
+      console.log(data);
+      if(data['status']==200)
+      {
+        this.total_cart_product=data['data'].length;
+        localStorage.setItem('cart',JSON.stringify(data['data']));
+      }
+      
+    }).catch(d=>{
+      if(d.status==400)
+          {
+            localStorage.setItem('cart','');
+          }
+      console.log(d);
+     
+    })
+  }
+  getCart()
+  {
+    if(localStorage.getItem('cart'))
+    {
+      return JSON.parse(localStorage.getItem('cart'));
+    }
+  }
+  setUserInfo(value)
+  {
+    localStorage.setItem("userInfo",JSON.stringify(value));
+  }
+
+  getUserInfo()
+  {
+    return JSON.parse(localStorage.getItem("userInfo"));
+  }
+
+
 
   async presentToast(message) {
     const toast = await this.toastController.create({

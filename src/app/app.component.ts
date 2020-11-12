@@ -14,6 +14,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { DataService } from './data.service';
 import { FunctionsService } from './functions.service';
 import { ApiService } from './api/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -60,7 +61,7 @@ export class AppComponent {
     'Purple',
     'Beige'
   ];
-
+user:any;
   menu(b){
     if(b){
       this.side_open = false;
@@ -84,7 +85,9 @@ export class AppComponent {
     public fun: FunctionsService,
     private api:ApiService,
     public navCtrl:NavController,
+    private router:Router
   ) {
+    this.user=this.api.getUserInfo();
     this.initializeApp();
   }
 
@@ -99,7 +102,9 @@ export class AppComponent {
       }
       else
       {
-        this.navCtrl.navigateRoot(['home']);
+        //  this.navCtrl.navigateRoot(['home']);
+        this.navCtrl.navigateRoot(['cart']);
+        // this.router.navigate(['productdetail'],{queryParams:{id:22,category_id:1}});
       }
       // this.splashScreen.hide();
     });

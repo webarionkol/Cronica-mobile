@@ -11,6 +11,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../data.service';
 import { FunctionsService } from '../functions.service';
 import { NavController } from '@ionic/angular';
+import { ApiService } from '../api/api.service';
+import { imgUrl, PRODUCTLIST } from '../config';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-productlist',
@@ -20,11 +23,39 @@ import { NavController } from '@ionic/angular';
 })
 export class ProductlistPage implements OnInit {
 
-
-
-  constructor(private fun: FunctionsService, private nav: NavController) {
+category_id:any;
+products:any;
+imgurl:any=imgUrl;
+  constructor(private fun: FunctionsService, private nav: NavController,private api: ApiService,private route:ActivatedRoute,
+    private router:Router) {
+      this.api.presentLoading();
+    this.route.queryParams.subscribe(data=>{
+      // console.log("productlist page");
+      // console.log(data.id);
+      this.category_id=data.id;
+      var formdata = new FormData();
+      formdata.append("category_id", data.id);
+      this.api.Post(PRODUCTLIST,formdata).then(data=>{
+        // console.log(data);
+        setTimeout(() => {
+          this.api.dismissLoading();
+        }, 1000);
+        this.products=data['data'];
+      }).catch(d=>{
+        console.log(d);
+        setTimeout(() => {
+          this.api.dismissLoading();
+        }, 1000);
+        this.api.presentToast("No Products");
+      })
+    })
+    
   }
-
+  productdetail(id)
+  {
+    console.log(id);
+    this.router.navigate(['productdetail'],{queryParams:{id:id,category_id:this.category_id}});
+  }
   ngOnInit() {
   }
 

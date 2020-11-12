@@ -52,10 +52,13 @@ export class SignupPage implements OnInit {
       country: new FormControl('', Validators.compose([ 
         Validators.required,
       ])),
-      register_type: new FormControl('', Validators.compose([ 
+      agent_code: new FormControl('', Validators.compose([ 
         Validators.required,
       ])),
       address: new FormControl('', Validators.compose([ 
+        Validators.required,
+      ])),
+      pincode: new FormControl('', Validators.compose([ 
         Validators.required,
       ]))
      });
@@ -92,9 +95,10 @@ export class SignupPage implements OnInit {
       formdata.append("city", value.city);
       formdata.append("state", value.state);
       formdata.append("country", value.country);
-      formdata.append("register_type", value.register_type);
+      formdata.append("agent_code", value.agent_code);
       formdata.append("address", value.address);
-      this.api.Post(REGISTER,formdata).then(data=>{
+      formdata.append("pincode", value.pincode);
+      this.api.Login(REGISTER,formdata).then(data=>{
         console.log(data);
         setTimeout(() => {
           this.api.dismissLoading();

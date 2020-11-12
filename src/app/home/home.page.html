@@ -15,8 +15,11 @@
     <!-- <ion-input type="text" (click)="fun.navigate('search')" padding-start placeholder="I'm shopping for..." class="search-bar"></ion-input> -->
     <ion-buttons slot="end">
       <ion-button (click)="fun.navigate('cart')">
+        
         <ion-icon name="cart" slot="icon-only" no-margin class="white top-btn"></ion-icon>
+        <ion-badge color="danger">{{total_quantity}}</ion-badge>
       </ion-button>
+      
       <!-- <ion-button (click)="side_open()">
         <ion-icon name="switch" slot="icon-only" *ngIf="segment!=data[1].title" no-margin class="white top-btn"></ion-icon>
       </ion-button> -->

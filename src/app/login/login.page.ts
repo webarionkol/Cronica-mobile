@@ -16,7 +16,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../api/api.service';
 import { Router } from '@angular/router';
-import { LOGIN } from '../config';
+import { LOGIN, PROFILE } from '../config';
 
 @Component({
   selector: 'app-login',
@@ -71,17 +71,35 @@ export class LoginPage implements OnInit {
       formdata.append("email", value.email);
       formdata.append("password", value.password);
       formdata.append("one_singnal", '11');
-      this.api.Post(LOGIN,formdata).then(data=>{
+      this.api.Login(LOGIN,formdata).then(data=>{
         console.log(data);
         this.api.setToken(data['success'].token);
+
+        
+          this.api.Post(PROFILE,{}).then(data=>{
+            console.log(data);
+            this.api.setUserInfo(data['data'][0]);
+            setTimeout(() => {
+              this.api.dismissLoading();
+            }, 2000);
+            this.api.updateCart();
+            this.router.navigate(['home']);
+          }).catch(d=>{
+            console.log(d)
+            setTimeout(() => {
+              this.api.dismissLoading();
+            }, 2000);
+          })
+        
+       
+
+        // this.router.navigate(['home']);
+      }).catch(d=>{
+         console.log(d);
         setTimeout(() => {
           this.api.dismissLoading();
         }, 2000);
-        this.router.navigate(['home']);
-      }).catch(d=>{
-        console.log(d);
-        this.api.dismissLoading();
-        this.api.presentToast(d.error.errors);
+        this.api.presentToast("Please try again later");
       })
 
     }

@@ -1,6 +1,6 @@
 //baseurl
 export const apiUrl ="https://cronica.clientdemo.cf/cronica/public/api/";
-export const imgUrl ="https://cronica.clientdemo.cf/cronica/";
+export const imgUrl ="https://cronica.clientdemo.cf/cronica/public/img/product/";
 export const razorPayKey = "rzp_test_Dmzimsnc9gzT7E";
 
 
@@ -9,10 +9,16 @@ export const razorPayKey = "rzp_test_Dmzimsnc9gzT7E";
 
 export const REGISTER="register";
 export const LOGIN="login";
+export const PROFILE="userdetails";
 export const OTPVERIFIED = 'otp_verification';
 export const FORGETPASSWORD = 'forget_password';
 export const RESETPASSWORD = 'reset_password';
 export const HOME="home";
+export const CART="cart";
+export const PRODUCTLIST="productlist";
+export const PRODUCTDETAIL="product";
+export const CONTACT="contact";
+export const ABOUT="pages/3";
 
 
 
@@ -38,7 +44,7 @@ export const OFFERS="offers";
 export const NOTIFICATIONS="notifications";
 
 //cart
-export const CART="cart";
+
 
 //order
 export const ORDER="order";
@@ -46,8 +52,7 @@ export const ORDER="order";
 //address
 export const ADDRESS="address";
 
-//cms
-export const ABOUT="cms";
+
 
 
 //prescription

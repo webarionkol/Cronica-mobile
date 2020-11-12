@@ -12,6 +12,7 @@ import { Product, DataService } from '../data.service';
 import { FunctionsService } from '../functions.service';
 import { IonSlides, AlertController } from '@ionic/angular';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { imgUrl } from '../config';
 
 @Component({
   selector: 'app-product',
@@ -23,8 +24,9 @@ export class ProductComponent implements OnInit {
 
   @Input() product: Product;
   @Input() slider: IonSlides;
+  @Input() product_detail;
   @Output() notify: EventEmitter<Number> = new EventEmitter<Number>();
-
+  imgurl:any=imgUrl;
   slideOpts = {
     effect: 'flip'
   };
@@ -32,7 +34,9 @@ export class ProductComponent implements OnInit {
   liked = false;
   constructor(public alertController: AlertController,
     private socialSharing: SocialSharing,
-    private fun: FunctionsService, private dataService: DataService) { }
+    private fun: FunctionsService, private dataService: DataService) {
+      console.log(this.product);
+     }
 
   ngOnInit() {
   }

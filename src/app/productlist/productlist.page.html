@@ -38,21 +38,18 @@
         <h3>Our Products</h3>
       </div>
       <div class="row">
-        <div class="col-md-4 col-sm-6 col-xs-6 col-6">
-            <a href="product01.html">
+        <div class="col-md-4 col-sm-6 col-xs-6 col-6" *ngFor="let product of products" (click)="productdetail(product.product_id)">
               <div class="about-us">
                 <div class="about-img">
-                  <img class="backimg" src="http://cronicagroup.com/img/portfolio/pic-01.jpg" alt="">
+                  <img class="backimg" src="{{imgurl+product.image}}" alt="">
                   <div class="sub-img">
                     <img src="http://cronicagroup.com/img/portfolio/pic-b.png" alt="">
                   </div>
-    
                 </div>
-                <h2>Mccb</h2>
+                <h2>{{product.product_name}}</h2>
               </div>
-            </a>
           </div>
-        <div class="col-md-4 col-sm-6 col-xs-6 col-6">
+        <!-- <div class="col-md-4 col-sm-6 col-xs-6 col-6">
           <a href="product02.html">
             <div class="about-us">
               <div class="about-img">
@@ -116,7 +113,7 @@
               <h2>Home Appliances</h2>
             </div>
           </a>
-        </div>
+        </div> -->
       </div>
   
     </div>

@@ -17,7 +17,8 @@
 </ion-header>
 
 <ion-content padding-top color="light">
-  <div class="mid" *ngIf="!show">
+  <div class="mid" *ngIf="cart">
+    <div *ngIf="cart.length==0">
     <ion-row size="12" justify-content-center disabled="true">
       <button class="circle">
         <ion-icon name="cart" size="large"></ion-icon>
@@ -29,21 +30,23 @@
     <ion-row size="12" justify-content-center disabled="true">
       <ion-button fill="clear" color="primary" (click)="browse()">Browse Products</ion-button>
     </ion-row>
+   </div>
   </div>
-  <div *ngIf="show">
+  <div *ngIf="cart">
+    <div *ngIf="cart.length!=0">
     <ion-row margin-horizontal margin-bottom>
       <ion-text><strong class="text">Items in Cart</strong></ion-text>
     </ion-row>
     <ion-list #slidingList>
-      <ion-item-sliding no-padding *ngFor="let item of data; let j = index;" class="card" no-margin>
+      <ion-item-sliding no-padding *ngFor="let item of cart; let j = index;" class="card" no-margin>
         <ion-item lines="none">
           <ion-row>
             <ion-col size="3" text-center>
-              <img [src]="item.product.image[0]" alt="item.product.name">
-              <ion-text color="danger" class="small" (click)="remove(j)">Remove</ion-text>
+              <img [src]="imgurl+item.image" alt="item.product.name">
+              <ion-text color="danger" class="small" (click)="remove(item.cart_id)">Remove</ion-text>
             </ion-col>
             <ion-col size="6">
-              <h3 no-margin class="item-name">{{item.product.name}}</h3>
+              <h3 no-margin class="item-name">{{item.productName}}</h3>
               <!-- <h5 no-margin class="item-def">{{item.product.size}}, {{item.product.color}}</h5>
               <h5 no-margin class="item-def">shipping: {{item.product.currency}}{{item.product.shipping}}</h5>
               <h5 no-margin class="item-def">Dec 31 - Jan 17</h5> -->
@@ -56,16 +59,20 @@
                 <h3 no-margin class="item-name" *ngIf="!item.product.offer" text-end>{{item.product.currency}}{{item.product.cost_price}}</h3>
               </ion-row> -->
               <ion-row justify-content-end>
-                <ion-select placeholder="-" interface="popover" [interfaceOptions]="customAlertOptions" [(ngModel)]='item.quantity'
+                <!-- <ion-select placeholder="-" interface="popover" [interfaceOptions]="customAlertOptions" [(ngModel)]='item.quantity'
                   class="select">
                   <ion-select-option *ngFor="let q of qty" [(value)]="q" text-center>{{q}}</ion-select-option>
-                </ion-select>
+                </ion-select> -->
+                <div>
+                  <ion-icon name="add-circle-outline" style="font-size: 20px;" (click)="updateCart(item.cart_id,+1)"></ion-icon>{{item.count}}<ion-icon name="remove-circle-outline" (click)="updateCart(item.cart_id,-1)" style="font-size: 20px;padding-right: 10px;"></ion-icon>
+                </div>
+                <!-- <ion-input>{{item.count}}</ion-input> -->
               </ion-row>
             </ion-col>
           </ion-row>
         </ion-item>
         <ion-item-options side="end">
-          <ion-item-option color="danger" (click)="remove(j)">
+          <ion-item-option color="danger" (click)="remove(item.cart_id)">
             <ion-icon name="trash" size="large"></ion-icon>
           </ion-item-option>
         </ion-item-options>
@@ -74,6 +81,7 @@
     <ion-row size="12" justify-content-center disabled="true">
         <ion-button fill="outline" color="primary" (click)="browse()">Continue shopping</ion-button>
       </ion-row>
+    </div>
     <!-- <ion-row margin>
       <ion-text><strong class="text">Order Summary</strong></ion-text>
     </ion-row>
