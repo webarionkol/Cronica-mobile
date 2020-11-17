@@ -51,19 +51,104 @@
       <app-review [product]="product" [bool]="false" class="slide"></app-review>
     </ion-slide> -->
   </ion-slides>
+  <div class="product-contents"  *ngIf="segment == 'Overview'">
+    <p>size is in inches</p>
+    <p>uploading may be extra as applicable</p>
+    <h5>Availability: In stock</h5>
+    <h4>RS. 8.00</h4>
+    <h5>*Inclusive of all Taxes</h5>
+    <div class="row mb-2">
+      <div class="col-xs-8">
+        <div class="quatity_area">
+          <div class="head">Quantity</div>
+          <div class="number-input md-number-input">
+            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
+            <input class="quantity" min="0" name="quantity" value="1" type="number">
+            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" class="btn cart-button">Add to cart</button>
+      </div>
+    </div>
+    <p>Qty in Bag(s)| Minimum Order Quantity is Bag(s) <br> (Note: uploading charge need to be paid in delivery location)</p>
+
+    <h2>Related Products</h2>
+    <ion-content class="height-fixed" >
+      <ion-slides>
+
+        <ion-slide>
+          <div class="slide">
+            <div class="row">
+              <div class="col-md-4 col-sm-6 col-xs-6 col-6">
+                <div class="product-box box-shadow">
+                  <img class="product_img" src="assets/images/slide-1.png" alt="">
+                  <span class="headtag">on sale</span>
+                  <h2>Mccb </h2>
+                  <p>was <span><i class="fa fa-inr"></i> 2000</span> <br> Save 26%</p>
+                  <h6><i class="fa fa-inr"></i> 1760</h6>
+                  <a href="#" class="buy-btn">Buy Now</a>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6 col-6">
+                <div class="product-box box-shadow">
+                  <img class="product_img" src="assets/images/slide-1.png" alt="">
+                  <span class="headtag">on sale</span>
+                  <h2>Mccb </h2>
+                  <p>was <span><i class="fa fa-inr"></i> 2000</span> <br> Save 26%</p>
+                  <h6><i class="fa fa-inr"></i> 1760</h6>
+                  <a href="#" class="buy-btn">Buy Now</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ion-slide>
+
+        <ion-slide>
+          <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-6 col-6">
+              <div class="product-box box-shadow">
+                <img class="product_img" src="assets/images/slide-1.png" alt="">
+                <span class="headtag">on sale</span>
+                <h2>Mccb </h2>
+                <p>was <span><i class="fa fa-inr"></i> 2000</span> <br> Save 26%</p>
+                <h6><i class="fa fa-inr"></i> 1760</h6>
+                <a href="#" class="buy-btn">Buy Now</a>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-6 col-6">
+              <div class="product-box box-shadow">
+                <img class="product_img" src="assets/images/slide-1.png" alt="">
+                <span class="headtag">on sale</span>
+                <h2>Mccb </h2>
+                <p>was <span><i class="fa fa-inr"></i> 2000</span> <br> Save 26%</p>
+                <h6><i class="fa fa-inr"></i> 1760</h6>
+                <a href="#" class="buy-btn">Buy Now</a>
+              </div>
+            </div>
+          </div>
+        </ion-slide>
+
+      </ion-slides>
+    </ion-content>
+  </div>
+  
+
+
 </ion-content>
 <ion-footer class="footer" align-items-center *ngIf="segment == 'Overview'">
   <ion-row align-items-center>
     <ion-col padding>
-      <!-- <ion-text *ngIf="product.offer">
+      <ion-text *ngIf="product.offer">
         <h6 no-margin class="cut">{{product.currency}}{{product.cost_price}}</h6>
-      </ion-text>  -->
-      <!-- <ion-text *ngIf="product_detail">
+      </ion-text>
+      <ion-text *ngIf="product_detail">
         <h3 no-margin class="foot-highlight">{{product_detail.amount}}</h3>
-      </ion-text> -->
-     <!--  <ion-text *ngIf="!product.offer">
+      </ion-text>
+     <ion-text *ngIf="!product.offer">
         <h3 no-margin class="foot-highlight">{{product.currency}}{{product.cost_price}}</h3>
-      </ion-text> -->
+      </ion-text>
     </ion-col>
     <ion-col size="4">
       <ion-button (click)="goToCart()" float-right class="white foot-btn" color="orange" no-margin expand="block"><strong>Buy</strong></ion-button>

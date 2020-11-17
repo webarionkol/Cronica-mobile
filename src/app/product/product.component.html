@@ -105,9 +105,11 @@
         </ion-col>
       </ion-row>
       <ion-row class="full" margin-top *ngIf="open[1]">
-        <ion-col>
+        <ion-col class="description_area">
           <!-- <span float-left>{{product_detail.description}}</span> -->
-          <div [innerHtml]="product_detail.description"></div>
+          <div class="description_content" >
+            <p [innerHtml]="product_detail.description"></p>
+          </div>
         </ion-col>
       </ion-row>
       <div class="sep"></div>

@@ -31,7 +31,7 @@ export class AppComponent {
     // { title: 'Notifications', url: '/notification', icon: 'notifications' },
     { title: 'Shopping Cart', url: '/cart', icon: 'cart' },
     { title: 'Order History', url: '/orders', icon: 'list' },
-    // { title: 'Wish Cash', url: '/wishcash', icon: 'wallet' },
+    { title: 'Wish Cash', url: '/landing', icon: 'wallet' },
     // { title: 'Rewards', url: '/rewards', icon: 'trophy' },
     // { title: 'Apply Promo', url: '/applypromo', icon: 'megaphone' }
   ];
