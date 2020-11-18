@@ -1,0 +1,112 @@
+
+ <ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <!-- <ion-input type="text" (click)="fun.navigate('search')" padding-start placeholder="I'm shopping for..." class="search-bar"></ion-input> -->
+    <!-- <ion-buttons slot="end">
+      <ion-button (click)="fun.navigate('cart')" class="padding-0">
+        
+        <ion-icon name="cart" slot="icon-only" no-margin class="white top-btn"></ion-icon>
+        <ion-badge color="danger">{{total_quantity}}</ion-badge>
+      </ion-button>
+      
+      <ion-button (click)="side_open()">
+        <ion-icon name="switch" slot="icon-only" *ngIf="segment!=data[1].title" no-margin class="white top-btn"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+
+  </ion-toolbar>
+  <!-- <ion-toolbar color="mytheme" class="segmenttoolbarSection">
+      <ion-segment mode="md"  (ionChange)="seg($event)" scrollable="true" id="dag" class="segSection">
+        <ion-segment-button   [attr.id]="'seg_' + i" *ngFor="let item of data; let i = index;" no-margin no-padding (ionSelect)="update(i)"
+          class="my-btn" [value]="item.title" [ngClass]="{'btn-active':segment == item.title}">
+          <ion-text padding-horizontal class="text">{{item.title}}</ion-text>
+        </ion-segment-button>
+      </ion-segment>
+  </ion-toolbar> -->
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="3">
+        <div class="logo-area">
+          <img src="assets/images/logo.jpg" alt="">
+        </div>
+      </ion-col>
+      <ion-col size="9">
+        <div class="logo_content02">
+          <h3>CRONICA GROUP</h3>
+          <img src="assets/images/logo02.png" alt="">
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="5">
+        <div class="tollfree">
+          <p>Toll free number</p>
+          <h4><a href="tel:1800 121 5113">1800 121 5113</a></h4>
+        </div>
+      </ion-col>
+      <ion-col size="7">
+        <div class="logo_cont">
+          <img src="assets/images/mini-logo.png" alt="">
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <a href="#">
+          <div class="inner-box">
+            <img src="assets/images/product.png" alt="">
+            <h3>Products</h3>
+          </div>
+        </a>
+      </ion-col>
+      <ion-col size="6">
+        <a href="#">
+          <div class="inner-box">
+            <img src="assets/images/about-us.png" alt="">
+            <h3>About Us</h3>
+          </div>
+        </a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <a href="#">
+          <div class="inner-box">
+            <img src="assets/images/contact.png" alt="">
+            <h3>Contact Us</h3>
+          </div>
+        </a>
+      </ion-col>
+      <ion-col size="6">
+        <a href="#">
+          <div class="inner-box">
+            <img src="assets/images/log-out.png" alt="">
+            <h3>Log out</h3>
+          </div>
+        </a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <div class="landg_cont">
+          <h3>COMPANY INTRODUCTION</h3>
+          <p><span>CRYSTAL ELECTRIC CO. PVT. LTD. </span>is an ISO 9001:2015 certified company, had a modest beginning in the year 1960 by S. Pritam Singh Chaggar, the founder, with the manufacturing of low Voltage Switchgear. By Dint of his hard work, determination and farsightedness the company made remarkable sucsess in the market.</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

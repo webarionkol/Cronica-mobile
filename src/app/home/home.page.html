@@ -13,16 +13,23 @@
       <ion-menu-button color="light"></ion-menu-button>
     </ion-buttons>
     <!-- <ion-input type="text" (click)="fun.navigate('search')" padding-start placeholder="I'm shopping for..." class="search-bar"></ion-input> -->
-    <ion-buttons slot="end">
-      <ion-button (click)="fun.navigate('cart')">
+    <!-- <ion-buttons slot="end">
+      <ion-button (click)="fun.navigate('cart')" class="padding-0">
         
         <ion-icon name="cart" slot="icon-only" no-margin class="white top-btn"></ion-icon>
       </ion-button>
       
-      <!-- <ion-button (click)="side_open()">
+      <ion-button (click)="side_open()">
         <ion-icon name="switch" slot="icon-only" *ngIf="segment!=data[1].title" no-margin class="white top-btn"></ion-icon>
-      </ion-button> -->
-    </ion-buttons>
+      </ion-button>
+    </ion-buttons> -->
+    <div slot="end">
+      <button  (click)="fun.navigate('cart')" class="cart-btn">
+        
+        <ion-icon name="cart" slot="icon-only" no-margin class="white"></ion-icon>
+        <ion-badge color="danger">{{total_quantity}}</ion-badge>
+      </button>
+    </div>
   </ion-toolbar>
   <!-- <ion-toolbar color="mytheme" class="segmenttoolbarSection">
       <ion-segment mode="md"  (ionChange)="seg($event)" scrollable="true" id="dag" class="segSection">

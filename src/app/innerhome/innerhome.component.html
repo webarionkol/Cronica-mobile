@@ -9,9 +9,14 @@
 
 <ion-row>
   <ion-col *ngFor="let data of recent_product;" size="6">
-    <ion-card class="card" no-margin (click)="open(data.product_id)">
+    <ion-card class="product-box box-shadow" no-margin (click)="open(data.product_id)">
       <ion-badge class="badge" *ngIf="data.offer">{{data.discount}}%</ion-badge>
-      <img [src]="imgurl+data.image" [alt]="data.product_name">
+      <img class="product_img" [src]="imgurl+data.image" [alt]="data.product_name">
+      <!-- <span class="headtag">on sale</span>
+      <h2>{{data.product_name}} </h2>
+      <p>was <span><i class="fa fa-inr"></i> 2000</span> <br> Save 26%</p>
+      <h6><i class="fa fa-inr"></i> 1760</h6>
+      <a href="#" class="buy-btn">Buy Now</a> -->
       <ion-card-content>
         <ion-card-title>
           <ion-row>
