@@ -9,6 +9,8 @@
  */
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
+import { ApiService } from '../api/api.service';
+import { imgUrl } from '../config';
 import { Orders } from '../data.service';
 import { FunctionsService } from '../functions.service';
 
@@ -19,10 +21,12 @@ import { FunctionsService } from '../functions.service';
 })
 export class OrderinfoPage implements OnInit {
 
-  order: Orders;
-
-  constructor(private modalController: ModalController, private params: NavParams, private fun: FunctionsService) {
+  order: any;
+  imgUrl=imgUrl;
+  user:any;
+  constructor(private modalController: ModalController, private params: NavParams, private fun: FunctionsService,private api:ApiService) {
     this.order = params.get('value');
+    this.user=this.api.getUserInfo();
   }
 
   ngOnInit() {

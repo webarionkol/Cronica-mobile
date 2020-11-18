@@ -117,6 +117,7 @@ export class ProductdetailPage implements OnInit {
       {
         
         this.api.updateCart();
+        this.api.presentToast("Product successfully added");
       }
       setTimeout(() => {
         this.api.dismissLoading();

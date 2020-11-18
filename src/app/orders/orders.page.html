@@ -24,20 +24,20 @@
 </ion-header>
 
 <ion-content padding color="light">
-  <ion-item margin-bottom no-padding lines="none" *ngFor="let order of orders" class="card" (click)="open(order)">
+  <ion-item margin-bottom no-padding lines="none" *ngFor="let order of data" class="card" (click)="open(order)">
     <ion-row align-items-center>
       <ion-col size="2">
-        <img [src]="order.product.image[0]">
+        <img [src]="imgUrl+order.product[0].image">
       </ion-col>
       <ion-col>
         <ion-row>
           <ion-text>
-            <h5 class="title" no-margin><strong>{{order.product.name}}</strong></h5>
+            <h5 class="title" no-margin><strong>Order Id:{{order.Order_id}}</strong></h5>
           </ion-text>
         </ion-row>
         <ion-row>
           <ion-text>
-            <h6 no-margin class="sub">{{order.status}}</h6>
+            <h6 no-margin class="sub">{{order.order_status}}</h6>
           </ion-text>
         </ion-row>
       </ion-col>

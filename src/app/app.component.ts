@@ -14,7 +14,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { DataService } from './data.service';
 import { FunctionsService } from './functions.service';
 import { ApiService } from './api/api.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +24,7 @@ export class AppComponent {
 
   side_open = true;
   side_open1 = true;
-
+  total_cart_product:any;
   public appPages = [
     { title: 'Home', url: '/home', icon: 'home' },
     // { title: 'Search', url: '/search', modal: true, icon: 'search' },
@@ -87,8 +87,13 @@ user:any;
     public fun: FunctionsService,
     private api:ApiService,
     public navCtrl:NavController,
-    private router:Router
+    private router:Router,
+    
   ) {
+    this.total_cart_product=this.api.total_cart_product;
+    this.api.Cart_emitter.subscribe(data=>{
+      this.total_cart_product=data;
+    })
     this.user=this.api.getUserInfo();
     this.initializeApp();
   }
@@ -106,7 +111,7 @@ user:any;
       else
       {
          this.navCtrl.navigateRoot(['home']);
-        // this.navCtrl.navigateRoot(['cart']);
+        // this.navCtrl.navigateRoot(['orders']);
         // this.router.navigate(['productdetail'],{queryParams:{id:22,category_id:1}});
       }
       // this.splashScreen.hide();
