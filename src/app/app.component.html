@@ -43,9 +43,9 @@
         </ion-menu-toggle>
         <div class="line"></div>
         <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages1">
-          <ion-item detail="false" lines="none" [routerDirection]="'root'" [routerLink]="[p.url]">
+          <ion-item detail="false" lines="none" [routerDirection]="'root'" [routerLink]="[p.url]" (click)="logout()">
             <ion-icon slot="start" [name]="p.icon" class="sidemenu-icon"></ion-icon>
-            <ion-label (click)="logout()">
+            <ion-label >
               {{p.title}}
             </ion-label>
           </ion-item>

@@ -26,7 +26,7 @@ export class AppComponent {
   side_open1 = true;
   total_cart_product:any;
   public appPages = [
-    { title: 'Home', url: '/home', icon: 'home' },
+    { title: 'Home', url: '/landing', icon: 'home' },
     // { title: 'Search', url: '/search', modal: true, icon: 'search' },
     // { title: 'Notifications', url: '/notification', icon: 'notifications' },
     { title: 'Shopping Cart', url: '/cart', icon: 'cart' },
@@ -103,7 +103,7 @@ user:any;
   logout(){
     this.api.presentToast("Logout successfuly");
     localStorage.clear();
-    this.page.navigateRoot('/login');
+    this.router.navigate(['login']);
   }
   initializeApp() {
     this.platform.ready().then(() => {
@@ -120,7 +120,7 @@ user:any;
          this.navCtrl.navigateRoot(['landing']);
         // this.navCtrl.navigateRoot(['cart']);
         //  this.navCtrl.navigateRoot(['productlist'],{queryParams:{id:8}});
-        // this.router.navigate(['productdetail'],{queryParams:{id:26,category_id:8}});
+        // this.navCtrl.navigateRoot(['productdetail'],{queryParams:{id:26,category_id:8}});
       }
       // this.splashScreen.hide();
     });

@@ -23,7 +23,7 @@ import { imgUrl } from '../config';
 export class ProductComponent implements OnInit {
 
   @Input() product: Product;
-  @Input() slider: IonSlides;
+  // @Input() slider: IonSlides;
   @Input() product_detail;
   @Output() notify: EventEmitter<Number> = new EventEmitter<Number>();
   imgurl:any=imgUrl;
@@ -49,13 +49,13 @@ export class ProductComponent implements OnInit {
     this.open[i] = !this.open[i];
   }
 
-  remove() {
-    this.slider.lockSwipes(true);
-  }
+  // remove() {
+  //   this.slider.lockSwipes(true);
+  // }
 
-  gainback() {
-    this.slider.lockSwipes(false);
-  }
+  // gainback() {
+  //   this.slider.lockSwipes(false);
+  // }
 
   like() {
     console.log('like')

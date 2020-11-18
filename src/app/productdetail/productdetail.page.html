@@ -8,38 +8,26 @@
  * LICENSE.md file in the root directory of this source .
  */ -->
 
-<ion-header class="mybg">
+ <ion-header class="mybg">
   <ion-toolbar color="mytheme">
     <ion-buttons slot="start">
-        <ion-back-button color="light"></ion-back-button>
+      <ion-menu-button color="light"></ion-menu-button>
     </ion-buttons>
-    <ion-title color="light">Details</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="fun.navigate('cart')">
-        <ion-icon name="cart" slot="icon-only" class="white top-btn" no-margin ></ion-icon>
-      </ion-button>
-      <!-- <ion-button>
-        <ion-icon name="search" slot="icon-only" class="white top-btn" no-margin></ion-icon>
-      </ion-button> -->
-    </ion-buttons>
+    <div slot="end">
+      <button  (click)="fun.navigate('cart')" class="cart-btn">
+        <ion-icon name="cart" slot="icon-only" no-margin class="white"></ion-icon>
+      </button>
+    </div>
   </ion-toolbar>
-  <!-- <ion-toolbar color="mytheme" class="segmenttoolbarSection">
-    <ion-segment (ionChange)="seg($event)" mode="md" scrollable="true" id="dag" class="segSection">
-      <ion-segment-button [attr.id]="'seg_' + i" *ngFor="let item of data; let i = index;" no-margin no-padding (ionSelect)="update(i)" class="my-btn"
-        [value]="item.title" [ngClass]="{'btn-active':segment == item.title}">
-        <ion-text padding-horizontal class="text">{{item.title}} </ion-text>
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar> -->
 </ion-header>
 
 <ion-content>
-  <ion-slides pager="false" [options]="slideOpts" (ionSlideDidChange)="change()" #Slides>
+  <ion-slides pager="false" [options]="slideOpts" >
     <!-- <ion-slide>
       <app-product (notify)="onReviewClick($event)" [product]="product" [slider]="slider" class="slide"></app-product>
     </ion-slide>  -->
     <ion-slide >
-      <app-product (notify)="onReviewClick($event)" [product_detail]="product_detail" [slider]="slider" class="slide"></app-product>
+      <app-product (notify)="onReviewClick($event)" [product_detail]="product_detail" ></app-product>
     </ion-slide> 
     <ion-slide padding class="light-bg" >
       <app-innerhome [recent_product]="recent_product" class="slide"></app-innerhome>
@@ -52,27 +40,6 @@
     </ion-slide> -->
   </ion-slides>
   <div class="product-contents"  *ngIf="segment == 'Overview'">
-    <!-- <p>size is in inches</p>
-    <p>uploading may be extra as applicable</p>
-    <h5>Availability: In stock</h5>
-    <h4>RS. 8.00</h4>
-    <h5>*Inclusive of all Taxes</h5>
-    <div class="row mb-2">
-      <div class="col-xs-8">
-        <div class="quatity_area">
-          <div class="head">Quantity</div>
-          <div class="number-input md-number-input">
-            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
-            <input class="quantity" min="0" name="quantity" value="1" type="number">
-            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-4">
-        <button type="button" class="btn cart-button">Add to cart</button>
-      </div>
-    </div>
-    <p>Qty in Bag(s)| Minimum Order Quantity is Bag(s) <br> (Note: uploading charge need to be paid in delivery location)</p> -->
 
     <h2>Related Products</h2>
     <ion-content class="height-fixed" >
@@ -86,49 +53,14 @@
                   <img class="product_img" src="{{imgurl+product.image}}" alt="">
                   <span class="headtag">on sale</span>
                   <h2>{{product.product_name }}</h2>
-                  <!-- <p>was <span><i class="fa fa-inr"></i> 2000</span> <br> Save 26%</p>
-                  <h6><i class="fa fa-inr"></i> 1760</h6>
-                  <a href="#" class="buy-btn">Buy Now</a> -->
                 </div>
               </div>
-              <!-- <div class="col-md-4 col-sm-6 col-xs-6 col-6">
-                <div class="product-box box-shadow">
-                  <img class="product_img" src="assets/images/slide-1.png" alt="">
-                  <span class="headtag">on sale</span>
-                  <h2>Mccb </h2>
-                  <p>was <span><i class="fa fa-inr"></i> 2000</span> <br> Save 26%</p>
-                  <h6><i class="fa fa-inr"></i> 1760</h6>
-                  <a href="#" class="buy-btn">Buy Now</a>
-                </div>
-              </div> -->
+             
             </div>
           </div>
         </ion-slide>
 
-        <!-- <ion-slide>
-          <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-6 col-6">
-              <div class="product-box box-shadow">
-                <img class="product_img" src="assets/images/slide-1.png" alt="">
-                <span class="headtag">on sale</span>
-                <h2>Mccb </h2>
-                <p>was <span><i class="fa fa-inr"></i> 2000</span> <br> Save 26%</p>
-                <h6><i class="fa fa-inr"></i> 1760</h6>
-                <a href="#" class="buy-btn">Buy Now</a>
-              </div>
-            </div>
-            <div class="col-md-4 col-sm-6 col-xs-6 col-6">
-              <div class="product-box box-shadow">
-                <img class="product_img" src="assets/images/slide-1.png" alt="">
-                <span class="headtag">on sale</span>
-                <h2>Mccb </h2>
-                <p>was <span><i class="fa fa-inr"></i> 2000</span> <br> Save 26%</p>
-                <h6><i class="fa fa-inr"></i> 1760</h6>
-                <a href="#" class="buy-btn">Buy Now</a>
-              </div>
-            </div>
-          </div>
-        </ion-slide> -->
+        
 
       </ion-slides>
     </ion-content>

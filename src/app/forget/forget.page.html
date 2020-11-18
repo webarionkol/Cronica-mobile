@@ -7,7 +7,7 @@
  * LICENSE.md file in the root directory of this source .
  */ -->
 
- <ion-header padding color="mytheme" class="mybg head">
+ <!-- <ion-header padding color="mytheme" class="mybg head">
   <ion-toolbar color="mytheme">
       <ion-buttons slot="start">
         <ion-back-button color="light"></ion-back-button>
@@ -16,8 +16,17 @@
   <ion-row justify-content-center>
     <ion-img src="assets/images/login.png" class="head-image"></ion-img>
   </ion-row>
+</ion-header> -->
+<ion-header padding color="mytheme" class="mybg head">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-row justify-content-center>
+    <ion-img src="assets/images/logo.jpg" class="head-image"></ion-img>
+  </ion-row>
 </ion-header>
-
 <ion-content padding>
 <ion-text><h3 no-margin margin-bottom text-center class="title">Reset Password</h3></ion-text>
 <form [formGroup]="validations_form"  (ngSubmit)="Reset(validations_form.value)">
