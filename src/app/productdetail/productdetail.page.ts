@@ -11,9 +11,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FunctionsService } from '../functions.service';
 import { DataService, Product, HomeTab } from '../data.service';
 import { IonSlides, MenuController, NavController, IonContent } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api/api.service';
-import { CART, PRODUCTDETAIL } from '../config';
+import { CART, imgUrl, PRODUCTDETAIL } from '../config';
 
 @Component({
   selector: 'app-productdetail',
@@ -24,6 +24,7 @@ export class ProductdetailPage implements OnInit {
 
   category_id:any;
   user:any;
+  imgurl:any=imgUrl;
   @ViewChild('Slides') slides: IonSlides;
   @ViewChild('Content') content: IonContent;
   @ViewChild('slider') slider: IonSlides;
@@ -46,16 +47,19 @@ export class ProductdetailPage implements OnInit {
     private dataService: DataService,
     private nav: NavController,
     private route:ActivatedRoute,
-    private api:ApiService) {
+    private api:ApiService,
+    private router:Router) {
       this.user=this.api.getUserInfo();
       this.api.presentLoading();
     this.route.queryParams.subscribe(data=>{
-      this.category_id=data.category_id;
+      // this.category_id=data.category_id;
       this.api.Put(PRODUCTDETAIL+"/"+data.id).then(data=>{
         console.log(data);
         this.segment="Overview";
         this.product_detail=data['data'];
         this.recent_product=data['recent_product'];
+        this.category_id=data['data'].category_id;
+        console.log("category id"+this.category_id);
         console.log(this.product_detail);
         setTimeout(() => {
           this.api.dismissLoading();
@@ -130,7 +134,11 @@ export class ProductdetailPage implements OnInit {
       this.api.presentToast("Product already exist to your cart");
     })
   }
-
+  productdetail(product)
+  {
+    // console.log(product);
+    this.router.navigate(['productdetail'],{queryParams:{id:product.product_id}});
+  }
   update(i) {
     this.slides.slideTo(i);
   }

@@ -31,14 +31,17 @@ export class AppComponent {
     // { title: 'Notifications', url: '/notification', icon: 'notifications' },
     { title: 'Shopping Cart', url: '/cart', icon: 'cart' },
     { title: 'Order History', url: '/orders', icon: 'list' },
-    { title: 'Wish Cash', url: '/landing', icon: 'wallet' },
+    { title: 'About Us', url: 'notificationssettings' },
+    { title: 'Contact Us', url: 'emailsettings' },
+    // { title: 'Wish Cash', url: '/landing', icon: 'wallet' },
     // { title: 'Rewards', url: '/rewards', icon: 'trophy' },
     // { title: 'Apply Promo', url: '/applypromo', icon: 'megaphone' }
   ];
   public appPages1 = [
     // { title: 'Customer Support', url: '/support', icon: 'people' },
    
-    { title: 'Settings', url: '/settings', icon: 'cog' },
+    // { title: 'Settings', url: '/settings', icon: 'cog' },
+    { title: 'Logout', url: 'login'}
     // { title: 'Logout', url: '/faqs', icon: 'help-circle' },
   ];
   
@@ -88,7 +91,7 @@ user:any;
     private api:ApiService,
     public navCtrl:NavController,
     private router:Router,
-    
+    private page: NavController
   ) {
     this.total_cart_product=this.api.total_cart_product;
     this.api.Cart_emitter.subscribe(data=>{
@@ -97,7 +100,11 @@ user:any;
     this.user=this.api.getUserInfo();
     this.initializeApp();
   }
-
+  logout(){
+    this.api.presentToast("Logout successfuly");
+    localStorage.clear();
+    this.page.navigateRoot('/login');
+  }
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
@@ -110,9 +117,10 @@ user:any;
       }
       else
       {
-         this.navCtrl.navigateRoot(['home']);
-        // this.navCtrl.navigateRoot(['orders']);
-        // this.router.navigate(['productdetail'],{queryParams:{id:22,category_id:1}});
+         this.navCtrl.navigateRoot(['landing']);
+        // this.navCtrl.navigateRoot(['cart']);
+        //  this.navCtrl.navigateRoot(['productlist'],{queryParams:{id:8}});
+        // this.router.navigate(['productdetail'],{queryParams:{id:26,category_id:8}});
       }
       // this.splashScreen.hide();
     });

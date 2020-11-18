@@ -20,6 +20,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { InfomodalPage } from './infomodal/infomodal.page';
 import { HttpClientModule } from '@angular/common/http'
 import { ApiService } from './api/api.service';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 @NgModule({
   declarations: [AppComponent, InfomodalPage],
   entryComponents: [InfomodalPage],
@@ -33,7 +37,11 @@ import { ApiService } from './api/api.service';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    ApiService
+    ApiService,
+    File,
+    FileTransfer,
+    AndroidPermissions ,
+    InAppBrowser
   ],
   bootstrap: [AppComponent]
 })

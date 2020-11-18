@@ -46,10 +46,8 @@ const routes: Routes = [
   { path: 'changeemail', loadChildren: './changeemail/changeemail.module#ChangeemailPageModule' },
   { path: 'changepassword', loadChildren: './changepassword/changepassword.module#ChangepasswordPageModule' },
   { path: 'otp', loadChildren: './otp/otp.module#OtpPageModule' },
-  { path: 'forget', loadChildren: './forget/forget.module#ForgetPageModule' },  { path: 'landing', loadChildren: './landing/landing.module#LandingPageModule' }
-
-
-
+  { path: 'forget', loadChildren: './forget/forget.module#ForgetPageModule' },
+  { path: 'landing', loadChildren: './landing/landing.module#LandingPageModule' }
 ];
 
 @NgModule({

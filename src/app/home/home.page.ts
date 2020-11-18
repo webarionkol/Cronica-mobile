@@ -29,6 +29,7 @@ export class HomePage {
   new_arrival:any;
   imgurl:any=imgUrl;
   total_quantity:any;
+  search_data:any;
   @ViewChild('Slides') slides: IonSlides;
 
   segment = '';
@@ -71,6 +72,7 @@ export class HomePage {
           else if(element.category=="categories")
           {
             this.categories=element.categories;
+            this.search_data=this.categories;
           }
           else if(element.category=="new_arrival")
           {
@@ -101,7 +103,20 @@ export class HomePage {
       this.segment = this.data[0].title;
     }
   }
-
+  search(event)
+  {
+    console.log(event);
+    if (!event){
+      this.categories=this.search_data;
+    }
+    else {
+      this.categories = this.search_data.filter(e => {
+        var name = e.category.toLowerCase();
+        var value = event.toLowerCase();
+        return name.includes(value);  
+      });
+    }
+  } 
   productlisting(id)
   {
     // console.log(id);

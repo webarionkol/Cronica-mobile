@@ -10,14 +10,14 @@
 <ion-header class="mybg">
   <ion-toolbar color="mytheme">
     <ion-buttons slot="start">
-      <ion-menu-button class="white menu" color="light"></ion-menu-button>
+      <ion-menu-button  color="light"></ion-menu-button>
     </ion-buttons>
     <ion-title color="light">
       Your Orders
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon name="cart" slot="icon-only" (click)="fun.navigate('cart')" class="white" margin></ion-icon>
+      <ion-button (click)="fun.navigate('cart')">
+        <ion-icon name="cart" slot="icon-only"  class="white" margin></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

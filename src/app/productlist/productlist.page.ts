@@ -12,9 +12,11 @@ import { Product } from '../data.service';
 import { FunctionsService } from '../functions.service';
 import { NavController } from '@ionic/angular';
 import { ApiService } from '../api/api.service';
-import { imgUrl, PRODUCTLIST } from '../config';
+import { CART, imgUrl, PRODUCTLIST } from '../config';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 @Component({
   selector: 'app-productlist',
   templateUrl: './productlist.page.html',
@@ -26,10 +28,13 @@ export class ProductlistPage implements OnInit {
 category_id:any;
 products:any;
 imgurl:any=imgUrl;
+user:any;
   constructor(private fun: FunctionsService, private nav: NavController,private api: ApiService,private route:ActivatedRoute,
-    private router:Router) {
-      this.api.presentLoading();
+    private router:Router,private transfer: FileTransfer, private file: File, private iab: InAppBrowser) {
+      this.user=this.api.getUserInfo();
+      
     this.route.queryParams.subscribe(data=>{
+      this.api.presentLoading();
       // console.log("productlist page");
       // console.log(data.id);
       this.category_id=data.id;
@@ -55,10 +60,61 @@ imgurl:any=imgUrl;
     })
     
   }
+  goToCart(product) {
+    console.log("in go to cart function");
+    console.log(product);
+    this.api.presentLoading();
+    var obj={
+      "data": [{
+        "category": product.category_id,
+        "count": 1,
+        "productId": product.product_id,
+        "productName": product.product_name,
+        "userid": this.user.id
+      }]
+    }
+    
+    this.api.Post(CART,obj).then(data=>{
+      console.log(data);
+      if(data['status']==200)
+      {
+        
+        this.api.updateCart();
+        this.api.presentToast("Product successfully added");
+      }
+      setTimeout(() => {
+        this.api.dismissLoading();
+      }, 2000);
+    }).catch(d=>{
+      setTimeout(() => {
+        this.api.dismissLoading();
+      }, 2000);
+      console.log(d);
+      this.api.presentToast("Product already exist to your cart");
+    })
+  }
   productdetail(id)
   {
     console.log(id);
     this.router.navigate(['productdetail'],{queryParams:{id:id,category_id:this.category_id}});
+  }
+  view()
+  {
+    console.log("view function");
+    const url = 'http://www.africau.edu/images/default/sample.pdf';
+    const browser = this.iab.create(url, '_system');
+  }
+  download()
+  {
+    console.log("download function");
+    const fileTransfer: FileTransferObject = this.transfer.create();
+    const url = 'http://www.africau.edu/images/default/sample.pdf';
+    fileTransfer.download(url, this.file.externalRootDirectory  + '/Download/').then((entry) => {
+    console.log('download complete: ' + entry.toURL());
+    }, (error) => {
+      // handle error
+      console.log(error);
+    });
   }
   ngOnInit() {
   }

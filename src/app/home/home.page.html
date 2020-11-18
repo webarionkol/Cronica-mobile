@@ -27,7 +27,7 @@
       <button  (click)="fun.navigate('cart')" class="cart-btn">
         
         <ion-icon name="cart" slot="icon-only" no-margin class="white"></ion-icon>
-        <ion-badge color="danger">{{total_quantity}}</ion-badge>
+        <!-- <ion-badge color="danger">{{total_quantity}}</ion-badge> -->
       </button>
     </div>
   </ion-toolbar>
@@ -42,6 +42,7 @@
 </ion-header>
 
 <ion-content color="light">
+  <ion-searchbar (ionChange)="search($event.detail.value)"></ion-searchbar>
   <div class="tree">
     <div class="section-header">
       <h3>Our Category</h3>

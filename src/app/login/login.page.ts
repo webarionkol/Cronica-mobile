@@ -83,7 +83,7 @@ export class LoginPage implements OnInit {
               this.api.dismissLoading();
             }, 2000);
             this.api.updateCart();
-            this.router.navigate(['home']);
+            this.router.navigate(['landing']);
           }).catch(d=>{
             console.log(d)
             setTimeout(() => {
