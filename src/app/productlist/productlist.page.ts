@@ -29,6 +29,7 @@ category_id:any;
 products:any;
 imgurl:any=imgUrl;
 user:any;
+search_data:any;
   constructor(private fun: FunctionsService, private nav: NavController,private api: ApiService,private route:ActivatedRoute,
     private router:Router,private transfer: FileTransfer, private file: File, private iab: InAppBrowser) {
       this.user=this.api.getUserInfo();
@@ -46,6 +47,7 @@ user:any;
           this.api.dismissLoading();
         }, 1000);
         this.products=data['data'];
+        this.search_data=this.products;
         console.log(this.products.length)
         if(this.products.length=='0'){
           this.api.presentToast("No Products");
@@ -60,6 +62,20 @@ user:any;
     })
     
   }
+  search(event)
+  {
+    console.log(event);
+    if (!event){
+      this.products=this.search_data;
+    }
+    else {
+      this.products = this.search_data.filter(e => {
+        var name = e.product_name.toLowerCase();
+        var value = event.toLowerCase();
+        return name.includes(value);  
+      });
+    }
+  } 
   goToCart(product) {
     console.log("in go to cart function");
     console.log(product);

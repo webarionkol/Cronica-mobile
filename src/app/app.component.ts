@@ -31,8 +31,8 @@ export class AppComponent {
     // { title: 'Notifications', url: '/notification', icon: 'notifications' },
     { title: 'Shopping Cart', url: '/cart', icon: 'cart' },
     { title: 'Order History', url: '/orders', icon: 'list' },
-    { title: 'About Us', url: 'notificationssettings' },
-    { title: 'Contact Us', url: 'emailsettings' },
+    { title: 'About Us', url: 'notificationssettings' ,icon:'contacts'},
+    { title: 'Contact Us', url: 'emailsettings' ,icon:'call'},
     // { title: 'Wish Cash', url: '/landing', icon: 'wallet' },
     // { title: 'Rewards', url: '/rewards', icon: 'trophy' },
     // { title: 'Apply Promo', url: '/applypromo', icon: 'megaphone' }
@@ -41,7 +41,7 @@ export class AppComponent {
     // { title: 'Customer Support', url: '/support', icon: 'people' },
    
     // { title: 'Settings', url: '/settings', icon: 'cog' },
-    { title: 'Logout', url: 'login'}
+    { title: 'Logout', url: 'login',icon:'power'}
     // { title: 'Logout', url: '/faqs', icon: 'help-circle' },
   ];
   

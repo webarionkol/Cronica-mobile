@@ -33,6 +33,7 @@
   </ion-header>
   
   <ion-content color="light">
+    <ion-searchbar (ionChange)="search($event.detail.value)"></ion-searchbar>
     <div class="tree">
       <div class="section-header" (click)="view()">
         <h3>Download Catalog</h3>
