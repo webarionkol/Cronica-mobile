@@ -87,6 +87,7 @@
 }
 .name {
     font-size: 18px;
+    text-align: left;
 }
 .small-ico {
     font-size: 12px;
@@ -103,9 +104,9 @@
     transform: translateX(-16px);
 }
 .fab {
-    width: 25px;
-    height: 25px;
-    padding: 9px;
+    width: 20px;
+    height: 20px;
+    padding: 6px;
     border-radius: 25px;
     margin-left: 6px;
     border: .6px solid rgba(0, 0, 0, .3);
@@ -118,4 +119,11 @@
 .full {
     width: 100%;
     display: block;
+}
+.description_area{
+    text-align:left;
+} 
+.description_content p{
+    font-size:14px;
+    margin:0 !important;
 }

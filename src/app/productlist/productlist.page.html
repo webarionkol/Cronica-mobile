@@ -42,17 +42,15 @@
       </div>
       <div class="row">
         <div class="col-md-4 col-sm-6 col-xs-6 col-6" *ngFor="let product of products" (click)="productdetail(product.product_id)">
-              <div class="about-us">
-                <div class="about-img">
-                  <img class="backimg" src="{{imgurl+product.image}}" alt="">
-                  <!-- <div class="sub-img">
-                    <img src="http://cronicagroup.com/img/portfolio/pic-b.png" alt="">
-                  </div> -->
-                </div>
+              <div class="product-box box-shadow">
+                <img class="product_img" src="{{imgurl+product.image}}" alt="">
+                <span class="headtag">on sale</span>
                 <h2>{{product.product_name}} </h2>
+                <p>was <span><i class="fa fa-inr"></i> 2000</span> <br> Save 26%</p>
+                <h6><i class="fa fa-inr"></i> 1760</h6>
+                <a href="#" class="buy-btn">Buy Now</a>
               </div>
           </div>
-      
       </div>
   
     </div>

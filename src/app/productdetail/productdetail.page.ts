@@ -86,7 +86,7 @@ export class ProductdetailPage implements OnInit {
   async change() {
     await this.slides.getActiveIndex().then(d => this.index = d);
     this.segment = this.data[this.index].title;
-    this.drag();
+    // this.drag();
   }
 
   onReviewClick(index) {
