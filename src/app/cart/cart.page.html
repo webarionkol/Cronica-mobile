@@ -6,7 +6,7 @@
  * This source code is licensed as per the terms found in the
  * LICENSE.md file in the root directory of this source .
  */ -->
-
+ 
 <ion-header>
   <ion-toolbar color="mytheme">
     <ion-buttons slot="start">
@@ -144,8 +144,10 @@
     </div> -->
   </div>
 </ion-content>
-<ion-footer *ngIf="show" (click)="fun.checkout()">
+<div *ngIf="cart">
+<ion-footer *ngIf="cart.length!=0" (click)="fun.checkout()">
   <ion-toolbar color="success">
     <ion-title>Checkout</ion-title>
   </ion-toolbar>
 </ion-footer>
+</div>

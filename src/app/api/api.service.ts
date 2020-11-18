@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class ApiService {
-  @Output() Cart:EventEmitter<any> = new EventEmitter();
+  @Output() Cart_emitter:EventEmitter<any> = new EventEmitter();
   @Output() Address:EventEmitter<any> = new EventEmitter();
  cart:any;
  location:any;
@@ -108,12 +108,15 @@ export class ApiService {
       {
         this.total_cart_product=data['data'].length;
         localStorage.setItem('cart',JSON.stringify(data['data']));
+        this.Cart_emitter.emit(this.total_cart_product);
       }
       
     }).catch(d=>{
       if(d.status==400)
           {
             localStorage.setItem('cart','');
+            this.total_cart_product=0;
+            this.Cart_emitter.emit(this.total_cart_product);
           }
       console.log(d);
      
@@ -183,7 +186,12 @@ export class ApiService {
       })
  }
 
- 
+ navigate(route)
+ {
+   console.log("navigate function");
+   this.route.navigate([route]);
+ }
+
   async presentAlert(message) {
         const alert = await this.alertController.create({
           header: 'sorry!',

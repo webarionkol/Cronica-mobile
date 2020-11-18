@@ -12,6 +12,9 @@ import { FunctionsService } from '../functions.service';
 import { DataService } from '../data.service';
 import { AlertController, MenuController } from '@ionic/angular';
 import swal from 'sweetalert';
+import { ApiService } from '../api/api.service';
+import { CART, CHECKOUT } from '../config';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -20,7 +23,44 @@ import swal from 'sweetalert';
 })
 export class CheckoutPage implements OnInit {
   addNewPayment = false
-  constructor(private menuCtrl: MenuController, private fun: FunctionsService, private dataService: DataService, private alertController: AlertController) { }
+  user:any;
+  data:any;
+  checkoutObj={};
+  constructor(private menuCtrl: MenuController, private fun: FunctionsService,
+     private dataService: DataService, private alertController: AlertController,
+     private api:ApiService,private route:Router) { 
+    this.api.presentLoading();
+    this.user=this.api.getUserInfo();
+    
+    this.api.Get(CART+"/show?user_id="+this.user.id).then(data=>{
+      if(data['status']==200)
+      {
+        this.data=data['data'];
+        console.log(this.data);
+        console.log(this.checkoutObj);
+        this.checkoutObj["calculation"]={};
+        this.checkoutObj["calculation"]["address"]=this.user.address+","+this.user.city+","+this.user.state+","+this.user.pincode+","+this.user.country;
+        this.checkoutObj["calculation"]["userid"]=this.user.id;
+        this.checkoutObj["calculation"]["paymentMode"]="cod";
+        this.checkoutObj["calculation"]["data"]=this.data;
+        console.log(this.checkoutObj);
+      }
+      setTimeout(() => {
+        this.api.dismissLoading();
+      }, 2000);
+    }).catch(d=>{
+      console.log(d);
+      if(d.status==400)
+      {
+        this.data=[];
+        this.route.navigate(['home'])
+      }
+      setTimeout(() => {
+        this.api.dismissLoading();
+      }, 2000);
+    })
+
+  }
 
   ngOnInit() {
   }
@@ -35,8 +75,31 @@ export class CheckoutPage implements OnInit {
   }
 
   done(){
-    swal("Awesome", "You just bought 2 awesome dresses", "success");
-    this.fun.navigate('home',false);
+    this.api.presentLoading();
+    console.log("done function");
+    this.api.Post(CHECKOUT,this.checkoutObj).then(data=>{
+      console.log(data);
+      setTimeout(() => {
+        this.api.dismissLoading();
+        if(data['status']==200)
+        {
+           swal("Awesome", "Order Placed successfully", "success");
+           this.fun.navigate('home',false);
+           this.api.updateCart();
+        }
+      }, 2000);
+    }).catch(d=>{
+      console.log(d);
+      if(d['status']==503)
+      {
+        localStorage.clear();
+      }
+      setTimeout(() => {
+        this.api.dismissLoading();
+        this.api.presentToast("Please login");
+        this.route.navigate(['login']);
+      }, 2000);
+    })
   }
 
 

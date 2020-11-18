@@ -21,20 +21,20 @@
 </ion-header>
 
 <ion-content padding color="light">
-  <ion-item margin-bottom no-padding lines="none" class="card">
+  <ion-item margin-bottom no-padding lines="none" class="card" *ngFor="let product of order.product">
     <ion-row align-items-center>
       <ion-col size="2">
-        <img [src]="order.product.image[0]">
+        <img [src]="imgUrl+product.image">
       </ion-col>
       <ion-col>
         <ion-row>
           <ion-text>
-            <h5 class="title" no-margin><strong>{{order.product.name}}</strong></h5>
+            <h5 class="title" no-margin><strong>{{product.productName}}</strong></h5>
           </ion-text>
         </ion-row>
         <ion-row>
           <ion-text>
-            <h6 no-margin class="sub">{{order.status}}</h6>
+            <h6 no-margin class="sub">{{order.order_status}}</h6>
           </ion-text>
         </ion-row>
       </ion-col>
@@ -50,7 +50,7 @@
         </ion-col>
         <ion-col>
           <ion-text>
-            <h6 no-margin class="title">{{fun.date(order.order_date)}}</h6>
+            <h6 no-margin class="title">{{order.created_at}}</h6>
           </ion-text>
         </ion-col>
       </ion-row>
@@ -62,19 +62,19 @@
         </ion-col>
         <ion-col>
           <ion-text>
-            <h6 no-margin class="title">{{order.id}}</h6>
+            <h6 no-margin class="title">{{order.Order_id}}</h6>
           </ion-text>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col size="4">
           <ion-text>
-            <h6 class="title gray" no-margin>Order total</h6>
+            <!-- <h6 class="title gray" no-margin>Order total</h6> -->
           </ion-text>
         </ion-col>
         <ion-col>
           <ion-text>
-            <h6 no-margin class="title">{{order.amount}}</h6>
+            <!-- <h6 no-margin class="title">{{order.amount}}</h6> -->
           </ion-text>
         </ion-col>
       </ion-row>
@@ -89,34 +89,33 @@
       </ion-row>
       <ion-row>
         <ion-text>
-          <h6 no-margin class="title gray">{{order.billing_address.first_name}} {{order.billing_address.last_name}}</h6>
+          <h6 no-margin class="title gray">{{user.name}}</h6>
         </ion-text>
       </ion-row>
       <ion-row>
         <ion-text>
-          <h6 no-margin class="title gray">{{order.billing_address.address_line_1}},
-            {{order.billing_address.address_line_2}}</h6>
+          <h6 no-margin class="title gray">{{user.address}}</h6>
         </ion-text>
       </ion-row>
       <ion-row>
         <ion-text>
-          <h6 no-margin class="title gray">{{order.billing_address.city}}, {{order.billing_address.state}},
-            {{order.billing_address.country}}</h6>
+          <h6 no-margin class="title gray">{{user.city}}, {{user.state}},
+            {{user.country}}</h6>
         </ion-text>
       </ion-row>
       <ion-row>
         <ion-text>
-          <h6 no-margin class="title gray">{{order.billing_address.zipcode}}</h6>
+          <h6 no-margin class="title gray">{{user.pincode}}</h6>
         </ion-text>
       </ion-row>
       <ion-row>
         <ion-text>
-          <h6 no-margin class="title gray">{{order.billing_address.phone_number}}</h6>
+          <h6 no-margin class="title gray">{{user.mobile_no}}</h6>
         </ion-text>
       </ion-row>
     </ion-col>
   </ion-item>
-  <ion-item margin-bottom no-padding lines="none" class="card">
+  <!-- <ion-item margin-bottom no-padding lines="none" class="card">
     <ion-col>
       <ion-row>
         <ion-text>
@@ -151,8 +150,8 @@
         </ion-text>
       </ion-row>
     </ion-col>
-  </ion-item>
-  <ion-item margin-bottom no-padding lines="none" class="card">
+  </ion-item> 
+   <ion-item margin-bottom no-padding lines="none" class="card">
     <ion-col>
       <ion-row>
         <ion-col size="4">
@@ -179,5 +178,5 @@
         </ion-col>
       </ion-row>
     </ion-col>
-  </ion-item>
+  </ion-item> -->
 </ion-content>

@@ -12,6 +12,9 @@ import { MenuController, ModalController } from '@ionic/angular';
 import { FunctionsService } from '../functions.service';
 import { DataService, Orders } from '../data.service';
 import { OrderinfoPage } from '../orderinfo/orderinfo.page';
+import { ApiService } from '../api/api.service';
+import { imgUrl, ORDERHISTORY } from '../config';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-orders',
@@ -21,10 +24,33 @@ import { OrderinfoPage } from '../orderinfo/orderinfo.page';
 export class OrdersPage implements OnInit {
 
   orders: Array<Orders>;
-
-  constructor(private menuCtrl: MenuController, private modalController: ModalController, private fun: FunctionsService, private dataService: DataService) {
+ data:any;
+ imgUrl=imgUrl;
+  constructor(private menuCtrl: MenuController, private modalController: ModalController, private fun: FunctionsService,
+     private dataService: DataService,private api:ApiService,private route:Router) {
+      this.api.presentLoading();
     this.orders = dataService.orders;
-  }
+    this.api.Get(ORDERHISTORY).then(data=>{
+      console.log(data);
+      if(data['status']==200){
+        this.data=data['data'];
+        console.log(this.data);
+      }
+      setTimeout(() => {
+        this.api.dismissLoading();
+      }, 2000);
+    }).catch(d=>{
+      console.log(d);
+      if(d['status']==503)
+      {
+        this.api.presentToast("Please login");
+        this.route.navigate(['login']);
+      }
+      setTimeout(() => {
+        this.api.dismissLoading();
+      }, 2000);
+    })
+   }
 
   ngOnInit() {
   }

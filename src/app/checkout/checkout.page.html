@@ -92,27 +92,28 @@
         <ion-label>Delivery Address</ion-label>
       </ion-list-header>
 
-      <ion-item *ngFor="let add of dataService.current_user.address; let i = index;">
+      <!-- <ion-item *ngFor="let add of dataService.current_user.address; let i = index;"> -->
+        <ion-item>
         <ion-label>
           <ion-row align-items-center>
-            <p no-margin><strong>{{add.first_name}} {{add.last_name}}</strong></p>
-            <h6 class="small mycolor" *ngIf="i==0" padding-start>PRIMARY</h6>
+            <p no-margin><strong>{{user.name}}</strong></p>
+            <!-- <h6 class="small mycolor" *ngIf="i==0" padding-start>PRIMARY</h6> -->
           </ion-row>
           <ion-row>
-            <p no-margin>{{add.address_line_1}}, {{add.address_line_2}}</p>
+            <p no-margin>{{user.address}}</p>
           </ion-row>
           <ion-row>
-            <p no-margin>{{add.city}}, {{add.state}}</p>
+            <p no-margin>{{user.city}}, {{user.state}}</p>
           </ion-row>
           <ion-row>
-            <p no-margin>{{add.country}}</p>
+            <p no-margin>{{user.country}}</p>
           </ion-row>
           <ion-row>
-            <p no-margin>{{add.zipcode}}</p>
+            <p no-margin>{{user.pincode}}</p>
           </ion-row>
         </ion-label>
 
-        <ion-radio slot="start" value="{{i}}" checked></ion-radio>
+        <ion-radio slot="start" checked></ion-radio>
       </ion-item>
 
     </ion-radio-group>

@@ -56,7 +56,8 @@ export class HomePage {
     private fun: FunctionsService,
     private dataService: DataService,
     private api:ApiService,
-    private router:Router) {
+    private router:Router,
+    ) {
       this.total_quantity=this.api.total_cart_product;
       console.log(this.api.total_cart_product);
       this.api.Get(HOME).then(data=>{

@@ -34,7 +34,7 @@
             <ion-icon slot="start" [name]="p.icon" class="sidemenu-icon"></ion-icon>
             <ion-label>
               {{p.title}}
-              <ion-badge *ngIf="p.title == 'Shopping Cart'" color="danger" class="label-subtext">6</ion-badge>
+              <ion-badge *ngIf="p.title == 'Shopping Cart'" color="danger" class="label-subtext">{{total_cart_product}}</ion-badge>
               
               <span *ngIf="p.title == 'Wish Cash'" class="label-subtext">: <span class="mycolor">{{dataService.wish_cash.currency}}{{fun.calculate(dataService.wish_cash.amount,
                   0)}}</span></span>
