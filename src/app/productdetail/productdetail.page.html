@@ -8,7 +8,7 @@
  * LICENSE.md file in the root directory of this source .
  */ -->
 
- <ion-header class="mybg">
+ <!-- <ion-header class="mybg">
   <ion-toolbar color="mytheme">
     <ion-buttons slot="start">
       <ion-menu-button color="light"></ion-menu-button>
@@ -19,9 +19,20 @@
       </button>
     </div>
   </ion-toolbar>
+</ion-header> -->
+<ion-header class="mybg">
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="fun.navigate('cart')">
+        <ion-icon name="cart" slot="icon-only" no-margin class="white top-btn"></ion-icon>
+      </ion-button>    
+    </ion-buttons>
+  </ion-toolbar> 
 </ion-header>
-
-<ion-content>
+<ion-content color="light">
   <ion-slides pager="false" [options]="slideOpts" >
     <!-- <ion-slide>
       <app-product (notify)="onReviewClick($event)" [product]="product" [slider]="slider" class="slide"></app-product>
@@ -29,9 +40,9 @@
     <ion-slide >
       <app-product (notify)="onReviewClick($event)" [product_detail]="product_detail" ></app-product>
     </ion-slide> 
-    <ion-slide padding class="light-bg" >
+    <!-- <ion-slide padding class="light-bg" >
       <app-innerhome [recent_product]="recent_product" class="slide"></app-innerhome>
-    </ion-slide>
+    </ion-slide> -->
     <!-- <ion-slide>
       <app-review [product]="product" [bool]="true" class="slide"></app-review>
     </ion-slide>

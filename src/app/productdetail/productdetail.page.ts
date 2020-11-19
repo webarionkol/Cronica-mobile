@@ -83,7 +83,7 @@ export class ProductdetailPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.menuCtrl.enable(false, 'start');
+    this.menuCtrl.enable(true, 'start');
     this.menuCtrl.enable(false, 'end');
   }
 

@@ -117,10 +117,11 @@ user:any;
       }
       else
       {
-         this.navCtrl.navigateRoot(['landing']);
+        //  this.navCtrl.navigateRoot(['landing']);
         // this.navCtrl.navigateRoot(['cart']);
-        //  this.navCtrl.navigateRoot(['productlist'],{queryParams:{id:8}});
+         this.navCtrl.navigateRoot(['productlist'],{queryParams:{id:8}});
         // this.navCtrl.navigateRoot(['productdetail'],{queryParams:{id:26,category_id:8}});
+        // this.router.navigate(['/productdetail'],{queryParams:{id:26,category_id:8}})
       }
       // this.splashScreen.hide();
     });

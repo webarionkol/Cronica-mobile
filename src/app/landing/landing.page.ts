@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
 import { FunctionsService } from '../functions.service';
 
 @Component({
@@ -9,10 +9,13 @@ import { FunctionsService } from '../functions.service';
 })
 export class LandingPage implements OnInit {
 
-  constructor(private fun: FunctionsService, private page: NavController) {
+  constructor(private menuCtrl: MenuController,private fun: FunctionsService, private page: NavController) {
     
    }
-
+   ionViewDidEnter() {
+    this.menuCtrl.enable(true, 'start');
+    this.menuCtrl.enable(false, 'end');
+  }
   ngOnInit() {
   }
   logout(){

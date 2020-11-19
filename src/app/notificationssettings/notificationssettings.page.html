@@ -7,20 +7,16 @@
  * LICENSE.md file in the root directory of this source .
  */ -->
 
-<!-- <ion-header>
-  <ion-toolbar color="mytheme">
-    <ion-buttons slot="start">
-        <ion-back-button color="light"></ion-back-button>
-    </ion-buttons>
-    <ion-title color="light">About Us</ion-title>
-  </ion-toolbar>
-</ion-header> -->
-<ion-header>
+ <ion-header class="mybg">
   <ion-toolbar color="mytheme">
     <ion-buttons slot="start">
       <ion-menu-button color="light"></ion-menu-button>
     </ion-buttons>
-    <ion-title color="light">About Us</ion-title>
+    <div slot="end">
+      <button  (click)="fun.navigate('cart')" class="cart-btn">
+        <ion-icon name="cart" slot="icon-only"  class="white"></ion-icon>
+      </button>
+    </div>
   </ion-toolbar>
 </ion-header>
 <ion-content color="light">

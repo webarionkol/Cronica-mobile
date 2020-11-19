@@ -10,7 +10,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../data.service';
 import { FunctionsService } from '../functions.service';
-import { NavController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
 import { ApiService } from '../api/api.service';
 import { CART, imgUrl, PRODUCTLIST } from '../config';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -30,7 +30,7 @@ products:any;
 imgurl:any=imgUrl;
 user:any;
 search_data:any;
-  constructor(private fun: FunctionsService, private nav: NavController,private api: ApiService,private route:ActivatedRoute,
+  constructor(private menuCtrl: MenuController,private fun: FunctionsService, private nav: NavController,private api: ApiService,private route:ActivatedRoute,
     private router:Router,private transfer: FileTransfer, private file: File, private iab: InAppBrowser) {
       this.user=this.api.getUserInfo();
       
@@ -61,6 +61,10 @@ search_data:any;
       })
     })
     
+  }
+  ionViewDidEnter() {
+    this.menuCtrl.enable(true, 'start');
+    this.menuCtrl.enable(false, 'end');
   }
   search(event)
   {

@@ -40,9 +40,9 @@ export class NotificationssettingsPage implements OnInit {
   ngOnInit() {
   }
   
-  ionViewDidEnter(){
+  ionViewDidEnter() {
+    this.menuCtrl.enable(true, 'start');
     this.menuCtrl.enable(false, 'end');
-    this.menuCtrl.enable(false, 'start');
   }
 
 }
