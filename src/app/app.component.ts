@@ -11,7 +11,6 @@ import { Component } from '@angular/core';
 import { NavController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { DataService } from './data.service';
 import { FunctionsService } from './functions.service';
 import { ApiService } from './api/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -86,7 +85,6 @@ user:any;
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    public dataService: DataService,
     public fun: FunctionsService,
     private api:ApiService,
     public navCtrl:NavController,

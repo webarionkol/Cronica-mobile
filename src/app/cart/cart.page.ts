@@ -177,6 +177,7 @@ imgurl:any=imgUrl;
           if(data['status']==200)
           {
             this.cart=data['data'];
+            this.checkoutObj["calculation"]["data"]=this.cart;
           }
           setTimeout(() => {
             this.api.dismissLoading();
@@ -186,6 +187,7 @@ imgurl:any=imgUrl;
           if(d.status==400)
           {
             this.cart=[];
+            this.checkoutObj["calculation"]["data"]=this.cart;
           }
           setTimeout(() => {
             this.api.dismissLoading();
