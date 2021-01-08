@@ -8,7 +8,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ApiService } from '../api/api.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { LOGIN, PROFILE } from '../config';
+import { LOGIN, PROFILE, STAFFLOGIN } from '../config';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 @Component({
   selector: 'app-stafflogin',
@@ -41,6 +41,7 @@ export class StaffloginPage implements OnInit {
           Validators.required,
         ]))
        });
+       console.log("apiservice");
   }
 
   ngOnInit() {
@@ -53,21 +54,24 @@ export class StaffloginPage implements OnInit {
   }
 
   signin(value) {
-    this.geolocation.getCurrentPosition().then((resp) => {
-      // alert(resp.coords.latitude)
-      // resp.coords.latitude
-      // resp.coords.longitude
-     }).catch((error) => {
-       console.log('Error getting location', error);
-     });
+    this.api.presentLoading();
+    // this.geolocation.getCurrentPosition().then((resp) => {
+    //   console.log(resp);
+    //   // alert(resp.coords.latitude)
+    //   // resp.coords.latitude
+    //   // resp.coords.longitude
+    //  }).catch((error) => {
+    //    console.log('Error getting location', error);
+    //  });
      
-     let watch = this.geolocation.watchPosition();
-     watch.subscribe((data) => {
-      // data can be a set of coordinates, or an error (if an error occurred).
-      // data.coords.latitude
-      // data.coords.longitude
-     });
-    // this.api.presentLoading();
+    //  let watch = this.geolocation.watchPosition();
+    //  watch.subscribe((data) => {
+    //    console.log(data);
+    //   // data can be a set of coordinates, or an error (if an error occurred).
+    //   // data.coords.latitude
+    //   // data.coords.longitude
+    //  });
+    
     if(this.validations_form.invalid)
     {
       setTimeout(() => {
@@ -81,38 +85,41 @@ export class StaffloginPage implements OnInit {
       formdata.append("email", value.email);
       formdata.append("password", value.password);
       formdata.append("one_singnal", '11');
-      // this.api.Login(LOGIN,formdata).then(data=>{
-        this.presentAlert();
-        this.router.navigate(['home']);
-        // console.log(data);
-      //   this.api.setToken(data['success'].token);
+      this.api.Login(STAFFLOGIN,formdata).then(data=>{
+        console.log(data);
+        this.api.setToken(data['success'].token);
 
         
-      //     this.api.Post(PROFILE,{}).then(data=>{
-      //       console.log(data);
-      //       this.api.setUserInfo(data['data'][0]);
-      //       setTimeout(() => {
-      //         this.api.dismissLoading();
-      //       }, 2000);
-      //       this.api.updateCart();
-      //       this.router.navigate(['landing']);
-      //     }).catch(d=>{
-      //       console.log(d)
-      //       setTimeout(() => {
-      //         this.api.dismissLoading();
-      //       }, 2000);
-      //     })
-        
-       
+          this.api.Post(PROFILE,{}).then(data=>{
+            console.log(data);
+            this.api.setUserInfo(data['data'][0]);
+            setTimeout(() => {
+              this.api.dismissLoading();
+            }, 2000);
+            this.api.updateCart();
+            this.presentAlert();
+            this.router.navigate(['landing']);
+          }).catch(d=>{
+            console.log(d)
+            setTimeout(() => {
+              this.api.dismissLoading();
+            }, 2000);
+          })
 
-      //   // this.router.navigate(['home']);
-      // }).catch(d=>{
-      //    console.log(d);
-      //   setTimeout(() => {
-      //     this.api.dismissLoading();
-      //   }, 2000);
-      //   this.api.presentToast("Please try again later");
-      // })
+      }).catch(d=>{
+         console.log(d);
+         if(d['error'])
+         {
+            this.api.presentToast(d['error']['errors']);
+         }
+         else
+         {
+           this.api.presentToast("Please try again later");
+         }
+        setTimeout(() => {
+          this.api.dismissLoading();
+        }, 2000);
+      })
 
     }
 

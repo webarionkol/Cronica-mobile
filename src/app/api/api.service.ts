@@ -1,9 +1,9 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { apiUrl, CART } from '../config';
+import { apiUrl, CART, STAFFLOCATION } from '../config';
 import { ToastController, LoadingController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +14,11 @@ export class ApiService {
  cart:any;
  location:any;
  total_cart_product:any;
+ setinterval:any;
   constructor(public http: HttpClient, public toastController: ToastController,
     public loadingController: LoadingController,public alertController: AlertController,
-    private route:Router) {
+    private route:Router,
+    private geolocation: Geolocation) {
     if(localStorage.getItem('cart'))
     {
       this.total_cart_product=(this.getCart()).length;
@@ -129,8 +131,49 @@ export class ApiService {
       return JSON.parse(localStorage.getItem('cart'));
     }
   }
+
+
+  sendLocation()
+  {
+    this.geolocation.getCurrentPosition().then((resp) => {
+          console.log(resp);
+          var formdata = new FormData();
+          formdata.append("lat", resp.coords.latitude.toString());
+          formdata.append("long", resp.coords.longitude.toString());
+          this.Post(STAFFLOCATION,formdata).then(data=>{
+            console.log(data);
+          }).catch(d=>{
+            console.log(d);
+          })
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });
+   this.setinterval=setInterval(()=>{
+      this.geolocation.getCurrentPosition().then((resp) => {
+          console.log(resp);
+          var formdata = new FormData();
+          formdata.append("lat", resp.coords.latitude.toString());
+          formdata.append("long", resp.coords.longitude.toString());
+          this.Post(STAFFLOCATION,formdata).then(data=>{
+            console.log(data);
+          }).catch(d=>{
+            console.log(d);
+          })
+        
+       }).catch((error) => {
+         console.log('Error getting location', error);
+       });
+    }, 1000 * 60 * 60);
+    
+  }
+
   setUserInfo(value)
   {
+    console.log(value.is_employee);
+    if(value.is_employee==1)
+    {
+        this.sendLocation();
+    }
     localStorage.setItem("userInfo",JSON.stringify(value));
   }
 

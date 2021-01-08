@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="mytheme">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light">User</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="user" >
+  <ion-text *ngIf="!checkout"><h3 no-margin margin-bottom text-center class="title">USER</h3></ion-text>
+  <form [formGroup]="validations_form"  (ngSubmit)="submit(validations_form.value)">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-input clearInput type="email" *ngIf="!checkout" placeholder="Email" formControlName="email"  class="input" padding-horizontal></ion-input>
+        <h3><strong *ngIf="checkout" style="margin-left: 58px !important;" class="black">User already exist</strong></h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" type="submit" color="mytheme" *ngIf="!checkout"><strong class="white">Submit</strong></ion-button>
+        <ion-button   *ngIf="checkout" color="success" style="margin-left: 90px !important;" (click)="placeOrder()"><strong class="white">Checkout</strong></ion-button>
+      </ion-col>
+    </ion-row>
+       
+  </ion-grid>
+  </form>
+</div>
+
+
+  <!-- <ion-footer *ngIf="checkout" (click)="placeOrder()">
+    <ion-toolbar color="success">
+      <ion-title>Checkout</ion-title>
+    </ion-toolbar>
+  </ion-footer> -->
+
+</ion-content>

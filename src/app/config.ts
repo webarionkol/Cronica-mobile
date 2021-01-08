@@ -17,6 +17,10 @@ export const CONTACT="contact";
 export const ABOUT="pages/3";
 export const CHECKOUT="checkout";
 export const ORDERHISTORY="checkout";
+export const STAFFLOGIN="employee_login";
+export const STAFFLOCATION="employee_location";
+export const CHECKUSER="check_user";
+export const ADDUSER="add_user";
 
 
 

@@ -16,6 +16,7 @@ import { ApiService } from '../api/api.service';
 import { CART, CHECKOUT, imgUrl } from '../config';
 import { Router } from '@angular/router';
 import swal from 'sweetalert';
+import { CheckuserPage } from '../checkuser/checkuser.page';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.page.html',
@@ -48,7 +49,7 @@ imgurl:any=imgUrl;
     private route:Router) {
       this.api.presentLoading();
       this.user=this.api.getUserInfo();
-      
+      console.log(this.user);
       this.api.Get(CART+"/show?user_id="+this.user.id).then(data=>{
         console.log(data);
         if(data['status']==200)
@@ -101,32 +102,42 @@ imgurl:any=imgUrl;
     }
     return await modal.present();
   }
+
+  
   done(){
-    this.api.presentLoading();
     console.log("done function");
-    this.api.Post(CHECKOUT,this.checkoutObj).then(data=>{
-      console.log(data);
-      setTimeout(() => {
-        this.api.dismissLoading();
-        if(data['status']==200)
+    if(this.user.is_employee==0)
+    {
+      this.api.presentLoading();
+      this.api.Post(CHECKOUT,this.checkoutObj).then(data=>{
+        console.log(data);
+        setTimeout(() => {
+          this.api.dismissLoading();
+          if(data['status']==200)
+          {
+             swal("Awesome", "Order Placed successfully", "success");
+             this.fun.navigate('home',false);
+             this.api.updateCart();
+          }
+        }, 2000);
+      }).catch(d=>{
+        console.log(d);
+        if(d['status']==503)
         {
-           swal("Awesome", "Order Placed successfully", "success");
-           this.fun.navigate('home',false);
-           this.api.updateCart();
+          localStorage.clear();
         }
-      }, 2000);
-    }).catch(d=>{
-      console.log(d);
-      if(d['status']==503)
-      {
-        localStorage.clear();
-      }
-      setTimeout(() => {
-        this.api.dismissLoading();
-        this.api.presentToast("Please login");
-        this.route.navigate(['login']);
-      }, 2000);
-    })
+        setTimeout(() => {
+          this.api.dismissLoading();
+          this.api.presentToast("Please login");
+          this.route.navigate(['login']);
+        }, 2000);
+      })
+    }
+    else
+    {
+        this.route.navigate(['checkuser'],{queryParams:{data:JSON.stringify(this.cart)}});
+    }
+    
   }
   calculate(i) {
     let res = 0;
@@ -231,6 +242,7 @@ imgurl:any=imgUrl;
                     if(data['status']==200)
                     {
                       this.cart=data['data'];
+                      this.checkoutObj["calculation"]["data"]=this.cart;
                     }
                     setTimeout(() => {
                       this.api.dismissLoading();
@@ -240,6 +252,7 @@ imgurl:any=imgUrl;
                     if(d.status==400)
                     {
                       this.cart=[];
+                      this.checkoutObj["calculation"]["data"]=this.cart;
                     }
                     setTimeout(() => {
                       this.api.dismissLoading();

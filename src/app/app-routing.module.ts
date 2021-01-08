@@ -48,7 +48,9 @@ const routes: Routes = [
   { path: 'otp', loadChildren: './otp/otp.module#OtpPageModule' },
   { path: 'forget', loadChildren: './forget/forget.module#ForgetPageModule' },
   { path: 'landing', loadChildren: './landing/landing.module#LandingPageModule' },
-  { path: 'stafflogin', loadChildren: './stafflogin/stafflogin.module#StaffloginPageModule' }
+  { path: 'stafflogin', loadChildren: './stafflogin/stafflogin.module#StaffloginPageModule' },
+  { path: 'checkuser', loadChildren: './checkuser/checkuser.module#CheckuserPageModule' },
+  { path: 'adduser', loadChildren: './adduser/adduser.module#AdduserPageModule' }
 ];
 
 @NgModule({

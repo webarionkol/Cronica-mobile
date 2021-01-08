@@ -100,6 +100,7 @@ user:any;
   }
   logout(){
     this.api.presentToast("Logout successfuly");
+    clearInterval(this.api.setinterval);
     localStorage.clear();
     this.router.navigate(['login']);
   }
@@ -124,8 +125,12 @@ user:any;
       }
       else
       {
+        if((this.api.getUserInfo()).is_employee==1)
+        {
+          this.api.sendLocation();
+        }
          this.navCtrl.navigateRoot(['landing']);
-        // this.navCtrl.navigateRoot(['cart']);
+        //  this.navCtrl.navigateRoot(['checkuser']);
         //  this.navCtrl.navigateRoot(['productlist'],{queryParams:{id:8}});
         // this.navCtrl.navigateRoot(['productdetail'],{queryParams:{id:26,category_id:8}});
         // this.router.navigate(['/productdetail'],{queryParams:{id:26,category_id:8}})

@@ -24,6 +24,7 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { CheckuserPage } from './checkuser/checkuser.page';
 @NgModule({
   declarations: [AppComponent, InfomodalPage],
   entryComponents: [InfomodalPage],
